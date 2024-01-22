@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuditCommit commit should correctly store an audit record 1`] = `
+Array [
+  Array [
+    "INSERT INTO  schema name.audit location table VALUES (
+gen_random_uuid(), 
+    null,
+    'I am a location code also known as a customer id or a customer code',
+    '02/15/2022',
+    null,
+    'Open',
+    'I am the auditor',
+    'I am the scanner'
+    ) RETURNING uuid;",
+  ],
+  Array [
+    "INSERT INTO  schema name.audit item table VALUES 
+    (
+    gen_random_uuid(),
+    'I am a lot',
+    'consignment_uuid1',
+    null,
+    'i am an item',
+    'falcon crest',
+    'mister mister',
+    '01/15/2023',
+    'True Match',
+    'location uuid',
+    1,
+    '06/15/2022',
+    null,
+    null
+    ),
+(
+    gen_random_uuid(),
+    'I am also a lot',
+    'consignment_uuid2',
+    'consignment location',
+    'i am an item',
+    'falcon crest',
+    'mister mister',
+    '01/15/2023',
+    'Found In Other Location',
+    'location uuid',
+    1,
+    '06/15/2022',
+    null,
+    null
+    ),
+(
+    gen_random_uuid(),
+    'I am a lot with no consignment',
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    'No Match',
+    'location uuid',
+    null,
+    '06/15/2022',
+    null,
+    null
+    ),
+(
+    gen_random_uuid(),
+    'I am a lot that is not in the scan',
+    'consignment_uuid2',
+    null,
+    'i am an item',
+    'falcon crest',
+    'mister mister',
+    '01/15/2023',
+    'Missing',
+    'location uuid',
+    1,
+    '06/15/2022',
+    null,
+    null
+    )
+     RETURNING lot, uuid;",
+  ],
+]
+`;

@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuditWorkTable should initialize state objects such as BatchEdit, NotesPanelState and NotesMapping 1`] = `
+Array [
+  Array [
+    Object {
+      "location_code": "customer location code",
+      "uuid": "audit location uuid",
+    },
+    "Sonny Bunch",
+  ],
+]
+`;
+
+exports[`AuditWorkTable should initialize state objects such as BatchEdit, NotesPanelState and NotesMapping 2`] = `
+Array [
+  Array [],
+]
+`;
+
+exports[`AuditWorkTable should initialize state objects such as BatchEdit, NotesPanelState and NotesMapping 3`] = `
+Array [
+  Array [
+    Object {
+      "items": Array [
+        Object {
+          "consignment_location": "consignment location",
+          "description": "description of the item",
+          "expire_date": "expiration date is coming soon.",
+          "family": "item family",
+          "item": "audit item",
+          "uuid": "item with everything",
+        },
+        Object {
+          "description": "description of the item",
+          "expire_date": "expiration date is coming soon.",
+          "family": "item family",
+          "item": "audit item",
+          "uuid": "item missing consignment location",
+        },
+        Object {
+          "consignment_location": "consignment location",
+          "description": "description of the item",
+          "expire_date": "expiration date is coming soon.",
+          "family": "item family",
+          "uuid": "item with item missing",
+        },
+        Object {
+          "consignment_location": "consignment location",
+          "description": "description of the item",
+          "expire_date": "expiration date is coming soon.",
+          "item": "audit item",
+          "uuid": "item with missing family",
+        },
+        Object {
+          "consignment_location": "consignment location",
+          "expire_date": "expiration date is coming soon.",
+          "family": "item family",
+          "item": "audit item",
+          "uuid": "item with missing description",
+        },
+        Object {
+          "consignment_location": "consignment location",
+          "description": "description of the item",
+          "family": "item family",
+          "item": "audit item",
+          "uuid": "item with missing expiration date",
+        },
+      ],
+      "location": Object {
+        "location_code": "customer location code",
+        "uuid": "audit location uuid",
+      },
+      "notes": Array [
+        "note1",
+        "note2",
+        "note3",
+      ],
+    },
+  ],
+]
+`;

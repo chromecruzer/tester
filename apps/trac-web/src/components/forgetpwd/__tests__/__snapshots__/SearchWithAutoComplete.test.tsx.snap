@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchWithAutoComplete onKeyChange should set the results when the key is a return or a tab 1`] = `
+Array [
+  Array [
+    "/?text=search text&filters=undefined",
+  ],
+]
+`;

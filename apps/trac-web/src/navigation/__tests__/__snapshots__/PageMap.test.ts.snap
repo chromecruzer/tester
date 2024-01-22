@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PagesMap activePage should throw an error when it cannot figure out a URL 1`] = `"URL oopsie/daisy/bicycle does not correspond to a page"`;
+
+exports[`PagesMap page should call buildURL with the right path 1`] = `
+Array [
+  Array [
+    "consignment/expiration",
+    Array [],
+    Object {},
+  ],
+]
+`;
+
+exports[`PagesMap page should call buildURL with the right path parameters 1`] = `
+Array [
+  Array [
+    "details",
+    Array [
+      "audit-scan",
+      "SESSION",
+    ],
+    Object {},
+  ],
+]
+`;
+
+exports[`PagesMap page should call buildURL with the search parameters 1`] = `
+Array [
+  Array [
+    "/",
+    Array [],
+    Object {
+      "filters": Array [
+        "customers",
+      ],
+      "text": "spencer",
+    },
+  ],
+]
+`;

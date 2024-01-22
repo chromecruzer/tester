@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImportIntoConsignments addToSearch should call searchTable correctly to add consignment records to the search table 1`] = `
+Array [
+  Array [
+    "SchemaName",
+    "TableName",
+    Object {
+      "query": [MockFunction],
+    },
+  ],
+]
+`;
+
+exports[`ImportIntoConsignments into should create SQL to convert IOL records to consignments 1`] = `
+"SELECT DISTINCT ON(uuid) iol.uuid AS uuid, iol.item AS item,
+    iol.description AS description, iol.lot AS lot, iol.quantity AS quantity, iol.expire_date AS expire_date,
+    prod.product_id_level3 AS product_id, iol.name_code AS customer_id, prod.uuid AS prod_uuid,
+    prod.description_level4 AS description4, prod.description_level5 AS description5
+    INTO SchemaName.TableName FROM SchemaName.IOLTableName AS iol JOIN SchemaName.ProductTableName
+    AS prod ON iol.description = prod.description
+WHERE prod.product_id_level3 IN ( 'product1', 'product2', 'product3', 'product4');"
+`;

@@ -1,0 +1,57 @@
+{
+  "name": "iol-extract",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/iol-extract/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/iol-extract",
+        "main": "apps/iol-extract/src/main.ts",
+        "tsConfig": "apps/iol-extract/tsconfig.app.json",
+        "assets": ["apps/iol-extract/src/assets"],
+        "target": "node",
+        "compiler": "tsc"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/iol-extract/src/environments/environment.ts",
+              "with": "apps/iol-extract/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/iol-extract/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/iol-extract"],
+      "options": {
+        "jestConfig": "apps/iol-extract/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "run-script": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "dependsOn": ["build"],
+      "options": {
+        "command": "node dist/apps/iol-extract/main.js"
+      }
+    }
+  },
+  "tags": []
+}

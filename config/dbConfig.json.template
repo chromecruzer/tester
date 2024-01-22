@@ -1,0 +1,9 @@
+{
+"user": "postgres-user",
+"password": "postgres-password",
+"port": 5432,
+"rootdatabase": "postgres",
+"database": "trac-db-name",
+"schema": "trac-schema-name",
+"audit_schema": "audit schema name"
+}

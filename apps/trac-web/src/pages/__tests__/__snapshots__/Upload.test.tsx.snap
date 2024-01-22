@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataUpload should have a button that does a cancel 1`] = `
+Array [
+  Array [
+    "SESSION",
+    "iol_record",
+  ],
+]
+`;
+
+exports[`DataUpload should have a button that should go to details 1`] = `
+Array [
+  Array [
+    "details/iol_record/SESSION",
+  ],
+]
+`;

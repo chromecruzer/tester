@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`postgresql appendBulkData should return  properly format rows of data appended to the sql string 1`] = `
+"bulk data is (
+
+( 'string', 57, '10/10/2021'),
+( 'another string', 65, '10/11/2021'),
+( 'also a string', 123, '10/12/2021')"
+`;
+
+exports[`postgresql appendBulkData should return  properly format rows of data preppended with a uuid appended to the sql string 1`] = `
+"bulk data is (
+
+(gen_random_uuid(), 'string', 57, '10/10/2021'),
+(gen_random_uuid(), 'another string', 65, '10/11/2021'),
+(gen_random_uuid(), 'also a string', 123, '10/12/2021')"
+`;
+
+exports[`postgresql appendBulkData should work even with a uuid appended to each row 1`] = `
+"bulk data with uuid is (
+
+( 'created-uuid-0bcd', 'string', 57, '10/10/2021'),
+( 'created-uuid-1bcd', 'another string', 65, '10/11/2021'),
+( 'created-uuid-2bcd', 'also a string', 123, '10/12/2021')"
+`;
+
+exports[`postgresql appendUuids should return a comma seperated list of uuids appended to the sql string 1`] = `
+"My UUIDs are (    
+'1uuid',    
+'2uuid',    
+'3uuid',    
+'4uuid',    
+'5uuid');"
+`;
+
+exports[`postgresql queryRecords should query with the proper SQL when called with a record ID 1`] = `"start of SELECT statement WHERE uuid field name='idForRecord';"`;
+
+exports[`postgresql queryRecords should query with the proper SQL when called with a set of IDs 1`] = `"start of SELECT statement WHERE id field name IN ('id1', 'id2', 'id3');"`;
+
+exports[`postgresql queryRecords should query with the proper SQL when called with a uuid 1`] = `"start of SELECT statement WHERE uuid='uuidForRecord';"`;

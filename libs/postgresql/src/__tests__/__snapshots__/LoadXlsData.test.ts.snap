@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadXlsData readWithMap should handle parsing of strings, dates, and numbers 1`] = `
+Array [
+  Array [
+    "I am a string",
+    57,
+    2021-10-10T05:00:00.000Z,
+  ],
+  Array [
+    "I am also a string",
+    123,
+    2021-10-11T05:00:00.000Z,
+  ],
+  Array [
+    "I am still a string",
+    2001,
+    2021-12-10T06:00:00.000Z,
+  ],
+]
+`;
+
+exports[`LoadXlsData readWithMap should return an error if the XLSX file does not exist 1`] = `[Error: "I am not a path" could not be read because Error: file does not exist]`;
+
+exports[`LoadXlsData scanForLotNumbers should ignore text rows 1`] = `
+Array [
+  "01234567",
+  "08901234",
+  "08901235",
+]
+`;
+
+exports[`LoadXlsData scanForLotNumbers should scan one column no headers 1`] = `
+Array [
+  "01234567",
+  "08901234",
+  "08901235",
+]
+`;

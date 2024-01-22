@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FileStore remove should remove both stored and cached data 1`] = `
+Array [
+  Array [
+    "some/root/directory/session-token.json",
+  ],
+]
+`;
+
+exports[`FileStore set should set both cached and stored 1`] = `
+Array [
+  Array [
+    "some/root/directory/session-token.json",
+    Object {
+      "submitted": "json data",
+    },
+  ],
+]
+`;

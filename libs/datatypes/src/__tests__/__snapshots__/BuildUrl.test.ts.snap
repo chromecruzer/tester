@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BuildUrl build should add path variables in correct order 1`] = `"subpath/path1/twopath/threepathpigs"`;
+
+exports[`BuildUrl build should add search parameters correctly 1`] = `"subpath/?key1=justme&key2=#pro"`;
+
+exports[`BuildUrl build should add search parameters with array of values correctly 1`] = `"subpath/?array1=just&array1=me&array1=and&array1=my&array1=boo&key2=#pro&array=tag&array=youre&array=it"`;
+
+exports[`BuildUrl build should adds all parameters correctly 1`] = `"subpath/path1/?key1=justme&key2=#pro"`;
+
+exports[`BuildUrl build should return /path if no host or port 1`] = `"subpath"`;
+
+exports[`BuildUrl build should return prefix with only host if no port 1`] = `"localhost/subpath"`;
+
+exports[`BuildUrl build should return the prefix if no parameters 1`] = `"localhost:1400/subpath"`;

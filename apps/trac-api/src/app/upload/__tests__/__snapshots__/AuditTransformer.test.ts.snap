@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuditTransformer transform should find lenses that have been moved 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "audit_match": "Found In Other Location",
+      "consignment_location": "consignment location",
+      "consignment_uuid": "consignment uuid 3",
+      "description": "vixen",
+      "expire_date": "2023-03-15T00:00:00.000-05:00",
+      "family": "dynasty",
+      "item": "i am an item",
+      "last_changed_date": "the time is now",
+      "lot": "missed match 1",
+      "quantity": 1,
+    },
+    Object {
+      "audit_match": "Found In Other Location",
+      "consignment_location": "consignment location",
+      "consignment_uuid": "consignment uuid 4",
+      "description": "larry",
+      "expire_date": "2023-03-15T00:00:00.000-05:00",
+      "family": "dallas",
+      "item": "i am an item",
+      "last_changed_date": "the time is now",
+      "lot": "missed match 2",
+      "quantity": 1,
+    },
+  ],
+  "location": Object {
+    "auditor": "User",
+    "close_date": null,
+    "location_code": "audit location",
+    "received_date": "the time is now",
+    "scan_date": 2022-10-23T05:00:00.000Z,
+    "scanner": "Sales Rep",
+    "status": "OPEN",
+  },
+  "notes": Array [],
+}
+`;
+
+exports[`AuditTransformer transform should find true matches 1`] = `
+Array [
+  Array [
+    "SELECT * FROM schema name.audit table name
+WHERE location_code='audit location'",
+  ],
+  Array [
+    "SELECT * FROM consignment schema & table name
+WHERE lot IN ('true match 1','true match 2');",
+  ],
+  Array [
+    "SELECT * FROM consignment schema & table name
+WHERE customer_id='audit location'
+AND lot NOT IN ('true match 1','true match 2');",
+  ],
+]
+`;
+
+exports[`AuditTransformer transform should find true matches 2`] = `
+Object {
+  "items": Array [
+    Object {
+      "audit_match": "True Match",
+      "consignment_uuid": "consignment uuid 1",
+      "description": "vixen",
+      "expire_date": "2023-03-15T00:00:00.000-05:00",
+      "family": "dynasty",
+      "item": "i am an item",
+      "last_changed_date": "the time is now",
+      "lot": "true match 1",
+      "quantity": 1,
+    },
+    Object {
+      "audit_match": "True Match",
+      "consignment_uuid": "consignment uuid 2",
+      "description": "larry",
+      "expire_date": "2023-03-15T00:00:00.000-05:00",
+      "family": "dallas",
+      "item": "i am an item",
+      "last_changed_date": "the time is now",
+      "lot": "true match 2",
+      "quantity": 1,
+    },
+  ],
+  "location": Object {
+    "auditor": "User",
+    "close_date": null,
+    "location_code": "audit location",
+    "received_date": "the time is now",
+    "scan_date": 2022-10-23T05:00:00.000Z,
+    "scanner": "Sales Rep",
+    "status": "OPEN",
+  },
+  "notes": Array [],
+}
+`;
+
+exports[`AuditTransformer transform should report audit entries that are missing from the audit scan 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "audit_match": "True Match",
+      "consignment_uuid": "consignment uuid 1",
+      "description": "vixen",
+      "expire_date": "2023-03-15T00:00:00.000-05:00",
+      "family": "dynasty",
+      "item": "i am an item",
+      "last_changed_date": "the time is now",
+      "lot": "true match 1",
+      "quantity": 1,
+    },
+    Object {
+      "audit_match": "True Match",
+      "consignment_uuid": "consignment uuid 2",
+      "description": "larry",
+      "expire_date": "2023-03-15T00:00:00.000-05:00",
+      "family": "dallas",
+      "item": "i am an item",
+      "last_changed_date": "the time is now",
+      "lot": "true match 2",
+      "quantity": 1,
+    },
+    Object {
+      "audit_match": "Missing",
+      "consignment_uuid": "consignment uuid 5",
+      "description": "vixen",
+      "expire_date": "2023-03-15T00:00:00.000-05:00",
+      "family": "dynasty",
+      "item": "i am an item",
+      "last_changed_date": "the time is now",
+      "lot": "missed scan 1",
+      "quantity": 1,
+    },
+    Object {
+      "audit_match": "Missing",
+      "consignment_uuid": "consignment uuid 6",
+      "description": "larry",
+      "expire_date": "2023-03-15T00:00:00.000-05:00",
+      "family": "dallas",
+      "item": "i am an item",
+      "last_changed_date": "the time is now",
+      "lot": "missed scan 2",
+      "quantity": 1,
+    },
+  ],
+  "location": Object {
+    "auditor": "User",
+    "close_date": null,
+    "location_code": "audit location",
+    "received_date": "the time is now",
+    "scan_date": 2022-10-23T05:00:00.000Z,
+    "scanner": "Sales Rep",
+    "status": "OPEN",
+  },
+  "notes": Array [],
+}
+`;
+
+exports[`AuditTransformer transform should report audit entries that could not be matched 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "audit_match": "No Match",
+      "last_changed_date": "the time is now",
+      "lot": "no match 1",
+    },
+    Object {
+      "audit_match": "No Match",
+      "last_changed_date": "the time is now",
+      "lot": "no match 2",
+    },
+  ],
+  "location": Object {
+    "auditor": "User",
+    "close_date": null,
+    "location_code": "audit location",
+    "received_date": "the time is now",
+    "scan_date": 2022-10-23T05:00:00.000Z,
+    "scanner": "Sales Rep",
+    "status": "OPEN",
+  },
+  "notes": Array [],
+}
+`;

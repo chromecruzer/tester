@@ -1,0 +1,93 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind components;
+@tailwind base;
+@tailwind utilities;
+
+.tab {
+  @apply py-2 px-3 uppercase tracking-wide
+  flex justify-items-stretch
+}
+
+.tab-normal {
+  @apply bg-bl-text-light text-bl-text-grey cursor-pointer
+  hover:text-bl-consumer-main hover:bg-gray-100
+  focus:text-tertiary-orange-main;
+}
+
+.tab-container {
+  @apply flex flex-col justify-items-stretch justify-start;
+}
+
+.tab-active {
+  @apply bg-bl-text-light text-bl-text-dark
+  hover:text-bl-consumer-main hover:bg-gray-100;
+}
+
+.tab-disabled {
+  @apply bg-bl-text-light text-gray-300 cursor-not-allowed pointer-events-none;
+}
+
+.button {
+  @apply items-center uppercase cursor-pointer flex flex-nowrap rounded;
+}
+
+.button-disabled {
+  @apply py-3 px-3 bg-bl-text-grey text-bl-text-light cursor-not-allowed;
+}
+
+.button-enabled {
+  @apply py-3 px-3 bg-bl-text-main text-bl-text-light border-2 border-bl-text-main cursor-pointer;
+}
+
+.button-enabled-outlined {
+  @apply py-3 px-3 text-bl-text-main bg-bl-text-light border-2 bottom-2 border-bl-text-light;
+}
+
+.icon-button {
+  @apply items-center uppercase flex flex-nowrap rounded;
+}
+
+.icon-button-disabled {
+  @apply py-3 px-3 bg-gray-100 text-bl-text-grey border-2 border-gray-100 cursor-not-allowed;
+}
+
+.icon-button-enabled {
+  @apply py-3 px-3 bg-bl-text-main text-bl-text-light border-2 border-bl-text-main cursor-pointer;
+}
+
+.icon-button-enabled-outlined {
+  @apply py-3 px-3 text-bl-text-main bg-bl-text-light border-2 bottom-2 border-bl-text-light;
+}
+
+.filter-button-active {
+  @apply bg-bl-text-dark text-bl-text-light hover:text-bl-text-light hover:bg-bl-consumer-dark;
+}
+
+.filter-button-inactive {
+  @apply bg-bl-text-light text-bl-text-grey hover:text-bl-consumer-main hover:bg-gray-100;
+}
+
+.normal-row {
+  @apply bg-bl-text-light text-bl-text-black;
+}
+
+.selected-row {
+  @apply bg-bl-text-main text-bl-text-light;
+}
+.scrolledContainer-100 {
+  height: 700px;
+  margin-top: 50px;
+  @apply overflow-y-auto space-y-10
+}
+.stickyContainer {
+  @apply sticky top-0 m-0
+}
+.tableHeader {
+  @apply  text-center px-1 cursor-pointer select-none;
+}
+.tableHeaderRow {
+  @apply bg-bl-consumer-light w-full min-w-full;
+}
+.tableCell {
+  @apply  px-1 cursor-pointer select-none;
+}

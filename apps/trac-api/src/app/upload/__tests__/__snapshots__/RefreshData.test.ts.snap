@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RefreshData refresh should calls the search table functions correctly 1`] = `
+Array [
+  Array [
+    "test schema",
+    "consignments",
+    "I am a client",
+  ],
+  Array [
+    "test schema",
+    "customers",
+    "I am a client",
+  ],
+  Array [
+    "test schema",
+    "products",
+    "I am a client",
+  ],
+  Array [
+    "test schema",
+    "salesreps",
+    "I am a client",
+  ],
+]
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RowButtonState parameters should return an array of all of the button names that are enabled 1`] = `
+Array [
+  "button2",
+  "button3",
+]
+`;
+
+exports[`RowButtonState style should return the style of a button based on its state 1`] = `"border-2 px-2 py-2 filter-button-inactive"`;
+
+exports[`RowButtonState style should return the style of a button based on its state 2`] = `"border-2 px-2 py-2 filter-button-active"`;
+
+exports[`RowButtonState style should return the style of a button based on its state 3`] = `"border-2 px-2 py-2 filter-button-active"`;

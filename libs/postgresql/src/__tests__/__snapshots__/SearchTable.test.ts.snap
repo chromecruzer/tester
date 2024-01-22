@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchTable #createTable should create a search table correctly 1`] = `
+"CREATE TABLE test-schema-name.searchCache
+(uuid UUID, schema varchar(20), tableName varchar(20), document tsvector);"
+`;
+
+exports[`SearchTable fillTable should fill a table with search records correctly 1`] = `
+"WITH searchTable AS (SELECT uuid, to_tsvector(
+ coalesce(searchField1, '') || ' ' ||  coalesce(searchField2, '')) AS doc from filled-table-schema-name.filled-table-name)
+    INSERT INTO test-schema-name.searchCache
+    SELECT uuid, 'filled-table-schema-name', 'filled-table-name', doc from searchTable;"
+`;
+
+exports[`SearchTable search should return correctly formatted search results 1`] = `
+"SELECT uuid, schema, tablename FROM test-schema-name.searchCache
+WHERE document @@ to_tsquery('pro:*')  AND tablename IN ( 'consignments')
+ORDER BY ts_rank(document, to_tsquery('pro:*'))
+DESC LIMIT 1200;"
+`;
+
+exports[`SearchTable search should return correctly formatted search results 2`] = `"select * from tracschema.customers where uuid in ( 'uuid1', 'uuid2', 'uuid3');"`;
+
+exports[`SearchTable search should return correctly formatted search results 3`] = `"select * from tracschema.products where uuid in ( 'uuid5');"`;
+
+exports[`SearchTable search should return correctly formatted search results 4`] = `
+Array [
+  Object {
+    "consignment_id": "RES",
+    "field": "efvwef1 - Pro",
+    "signature": Object {
+      "address": undefined,
+      "city": undefined,
+      "customer_code": "RES",
+      "dea_number": undefined,
+      "hin_number": undefined,
+      "name": "efvwef1 - Pro",
+      "phone": undefined,
+      "postal": undefined,
+      "state": undefined,
+    },
+    "type": "customers",
+    "uuid": "uuid1",
+  },
+  Object {
+    "consignment_id": "X RES",
+    "field": "efvwef2 - Pro",
+    "signature": Object {
+      "address": undefined,
+      "city": undefined,
+      "customer_code": "X RES",
+      "dea_number": undefined,
+      "hin_number": undefined,
+      "name": "efvwef2 - Pro",
+      "phone": undefined,
+      "postal": undefined,
+      "state": undefined,
+    },
+    "type": "customers",
+    "uuid": "uuid2",
+  },
+  Object {
+    "consignment_id": "RES1",
+    "field": "efvwef3 - Pro",
+    "signature": Object {
+      "address": undefined,
+      "city": undefined,
+      "customer_code": "RES1",
+      "dea_number": undefined,
+      "hin_number": undefined,
+      "name": "efvwef3 - Pro",
+      "phone": undefined,
+      "postal": undefined,
+      "state": undefined,
+    },
+    "type": "customers",
+    "uuid": "uuid3",
+  },
+  Object {
+    "consignment_id": "RES",
+    "field": "PRO",
+    "signature": Object {
+      "description": "PRO",
+      "description_level2": undefined,
+      "description_level3": undefined,
+      "description_level4": undefined,
+      "description_level5": undefined,
+      "product_id": "RES",
+      "product_id_level2": undefined,
+      "product_id_level3": undefined,
+      "product_id_level4": undefined,
+      "product_id_level5": undefined,
+    },
+    "type": "products",
+    "uuid": "uuid5",
+  },
+]
+`;

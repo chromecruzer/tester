@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddAuditNoteDialog should submit a typed note 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "annotate_type": "Audit",
+        "annotated_uuid": "Vienna",
+        "audit_uuid": "Vienna",
+        "author": "Beethoven",
+        "content": "Ich bin fertig mit meinen note",
+        "date_created": "07/20/2022",
+      },
+    ],
+  ],
+]
+`;

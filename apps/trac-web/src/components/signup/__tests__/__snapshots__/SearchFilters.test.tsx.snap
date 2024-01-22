@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchFilters should call the filter params function with the updated buttons when toggled 1`] = `
+RowButtonsState {
+  "active": "filter-button-active",
+  "buttonCallback": null,
+  "buttonStates": Object {
+    "customers": Object {
+      "key": "customers",
+      "state": true,
+      "title": "Customers",
+    },
+    "products": Object {
+      "key": "products",
+      "state": true,
+      "title": "Products",
+    },
+  },
+  "inactive": "filter-button-inactive",
+  "prefix": "border-2 px-2 py-2 ",
+}
+`;

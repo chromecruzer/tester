@@ -1,0 +1,57 @@
+{
+  "name": "db-reset",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/db-reset/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/db-reset",
+        "main": "apps/db-reset/src/main.ts",
+        "tsConfig": "apps/db-reset/tsconfig.app.json",
+        "assets": ["apps/db-reset/src/assets"],
+        "target": "node",
+        "compiler": "tsc"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/db-reset/src/environments/environment.ts",
+              "with": "apps/db-reset/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/db-reset/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/db-reset"],
+      "options": {
+        "jestConfig": "apps/db-reset/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "run-script": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "dependsOn": ["build"],
+      "options": {
+        "command": "node --max_old_space_size=4096 dist/apps/db-reset/main.js"
+      }
+    }
+  },
+  "tags": []
+}

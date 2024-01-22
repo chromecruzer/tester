@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuditUploadForm should set location on the form 1`] = `
+Array [
+  Array [
+    Object {
+      "locationCode": "I am a customer code",
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "",
+    },
+  ],
+]
+`;
+
+exports[`AuditUploadForm should set location on the form 2`] = `
+Array [
+  Array [
+    Object {
+      "locationCode": "I am a customer code",
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "",
+    },
+  ],
+]
+`;
+
+exports[`AuditUploadForm should set the scan date on the form 1`] = `
+Array [
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": "07/11/2022",
+      "scanner": "",
+    },
+  ],
+]
+`;
+
+exports[`AuditUploadForm should set the scan date on the form 2`] = `
+Array [
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": "07/11/2022",
+      "scanner": "",
+    },
+  ],
+]
+`;
+
+exports[`AuditUploadForm should set the scanner name on the form 1`] = `
+Array [
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "M",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "r",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": ".",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": " ",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "S",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "c",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "a",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "n",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "n",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "e",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "r",
+    },
+  ],
+]
+`;
+
+exports[`AuditUploadForm should set the scanner name on the form 2`] = `
+Array [
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "M",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "r",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": ".",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": " ",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "S",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "c",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "a",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "n",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "n",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "e",
+    },
+  ],
+  Array [
+    Object {
+      "locationCode": null,
+      "scanDate": 2022-05-23T05:00:00.000Z,
+      "scanner": "r",
+    },
+  ],
+]
+`;

@@ -1,0 +1,101 @@
+{
+  "name": "trac-web",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/trac-web/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "dependsOn": ["build-css"],
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/trac-web",
+        "index": "apps/trac-web/src/index.html",
+        "baseHref": "/",
+        "main": "apps/trac-web/src/main.tsx",
+        "polyfills": "apps/trac-web/src/polyfills.ts",
+        "tsConfig": "apps/trac-web/tsconfig.app.json",
+        "assets": ["apps/trac-web/src/favicon.ico", "apps/trac-web/src/assets"],
+        "styles": [
+          "apps/trac-web/src/styles/styles.scss",
+          "apps/trac-web/src/styles/tailwind.css"
+        ],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/trac-web/src/environments/environment.ts",
+              "with": "apps/trac-web/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "options": {
+        "buildTarget": "trac-web:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "trac-web:build:production",
+          "hmr": false
+        },
+        "development": {
+          "buildTarget": "trac-web:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "dependsOn": ["build-css"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/trac-web/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/trac-web"],
+      "options": {
+        "jestConfig": "apps/trac-web/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build-css": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx tailwindcss-cli -i ./src/styles/styles.scss -o ./src/styles/tailwind.css",
+        "cwd": "apps/trac-web"
+      }
+    },
+    "copy-webConfig": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "cp ./config/webConfig.js ./apps/trac-web/src/assets/"
+      }
+    }
+  },
+  "tags": []
+}

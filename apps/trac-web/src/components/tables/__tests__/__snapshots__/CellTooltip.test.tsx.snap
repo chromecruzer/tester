@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CellTooltip should create a tooltip with the td cell 1`] = `" bg-bl-consumer-off-white text-bl-text-dark"`;
+
+exports[`CellTooltip should create a tooltip with the td cell 2`] = `"rowId_columnId_tt"`;

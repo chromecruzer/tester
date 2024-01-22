@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchFilterButtonsState reduxFilter should format the button states into a states object if any buttons are true 1`] = `
+Object {
+  "button1": false,
+  "button2": true,
+}
+`;
+
+exports[`SearchFilterButtonsState reduxFilter should return the defaultStates if nothing is true 1`] = `
+Object {
+  "thisisadefaultstate": true,
+}
+`;

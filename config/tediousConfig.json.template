@@ -1,0 +1,10 @@
+{
+"user": "SurgicalOps1",
+"password": "mssql-password",
+"server": "swiwapdbscdwp50.blamerica.bausch.com",
+"database": "TableauModelData_Surgical",
+"productsTable": "dbo.PS_Prod_Master"
+"customersTable": "dbo.Customer_Master_Unique"
+"mappingsTable": "dbo.Customer_Sales_Rep_Alignment"
+"salesRepsTable": "dbo.Dim_SalesRep"
+}

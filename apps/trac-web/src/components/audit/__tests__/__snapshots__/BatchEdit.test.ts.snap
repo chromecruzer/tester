@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BatchEdit createNote should create a note object with the correct type and content 1`] = `
+Array [
+  Object {
+    "annotate_type": "Audit",
+    "annotated_uuid": "uuid1",
+    "audit_uuid": "location uuid",
+    "author": "I am a writer",
+    "content": "Here is a comment
+ with a return",
+    "date_created": "07/11/2022",
+  },
+  Object {
+    "annotate_type": "Audit",
+    "annotated_uuid": "uuid2",
+    "audit_uuid": "location uuid",
+    "author": "I am a writer",
+    "content": "Here is a comment
+ with a return",
+    "date_created": "07/11/2022",
+  },
+  Object {
+    "annotate_type": "Audit",
+    "annotated_uuid": "uuid3",
+    "audit_uuid": "location uuid",
+    "author": "I am a writer",
+    "content": "Here is a comment
+ with a return",
+    "date_created": "07/11/2022",
+  },
+]
+`;
+
+exports[`BatchEdit matchChange should return a match change object with the selected uuids 1`] = `
+Object {
+  "items": Array [
+    "uuid1",
+    "uuid2",
+    "uuid3",
+  ],
+  "match": "Billed",
+  "user": "I am a writer",
+}
+`;
+
+exports[`BatchEdit moved should return a match change object with moved location information 1`] = `
+Object {
+  "customerId": "moved code",
+  "items": Array [
+    "uuid1",
+    "uuid2",
+    "uuid3",
+  ],
+  "match": "Found In Other Location",
+  "user": "I am a writer",
+  "uuid": "moved uuid",
+}
+`;

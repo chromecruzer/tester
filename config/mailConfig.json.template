@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "port": 1025,
+  "expired_sender": "BLExpired@bausch.com",
+  "missing_sender": "SU.Consign@bausch.com"
+}

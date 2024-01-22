@@ -1,0 +1,1 @@
+{"server":{"batchSize":1,"delayInSeconds":10,"disableExpireEmails":true},"ccSTM":false,"ccPDM":false,"ccKAE":false,"missingHeader":{"subject":null,"sender":null,"attachmentTableName":"Intraocular Lens (IOL) Inventory Audit - {Date}"},"expiredHeader":{"subject":null,"sender":null,"attachmentTableName":"Expired List - {Date}"}}

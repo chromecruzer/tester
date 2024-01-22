@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IolRecordFormatter #formatRowValues should format the dates of an iol record 1`] = `
+Object {
+  "expire_date": "03/16/2014",
+  "received_date": "03/26/2016",
+  "shipped_date": "03/06/2016",
+}
+`;

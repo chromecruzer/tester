@@ -1,0 +1,60 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+/.vscode/
+/apps/trac-web/node_modules
+/apps/trac-api/src/assets/~$*.xlsx
+/uploads/
+/apps/trac-web/src/styles/tailwind.css
+/apps/db-reset/src/assets/~$*.xlsx
+/migrations.json
+/apps/trac-api/src/assets/audit_scans/~$*.xlsx
+/apps/iol-extract/src/environments/
+/docker/config/
+/docker-compose-trac.yml
+/docker-compose-trac-*.yml
+/docker/trac-backups/
+/texxstDoc.pdf
+/config/webConfig.js
+/config/*.json
+/apps/trac-web/src/assets/webConfig.js
+/apps/tedioustest/src/assets/~$*
+/docker/lib/trac-backups/
+/config/templates/
+/apps/trac-api/.serve.env

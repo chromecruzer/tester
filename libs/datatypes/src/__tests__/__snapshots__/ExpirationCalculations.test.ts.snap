@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExpirationCalculations decorateRecords should calculate text date correctly and added the correct label and css 1`] = `
+Array [
+  Object {
+    "description4": "premium item 1 border case",
+    "expire_date": "10/10/2021",
+    "expire_status": "Expired",
+    "expire_status_css": "text-red-600 bg-gray-100 font-extrabold text-center",
+    "product_id": "PREM_IOLS_TOT",
+  },
+  Object {
+    "description4": "premium item 1 border case",
+    "expire_date": "10/09/2021",
+    "expire_status": "Expired",
+    "expire_status_css": "text-red-600 bg-gray-100 font-extrabold text-center",
+    "product_id": "PREM_IOLS_TOT",
+  },
+  Object {
+    "description4": "standard item 1 border case",
+    "expire_date": "04/07/2021",
+    "expire_status": "Expired",
+    "expire_status_css": "text-red-600 bg-gray-100 font-extrabold text-center",
+    "product_id": "STAND_IOLS_TOT",
+  },
+  Object {
+    "description4": "premium item 1 30 days",
+    "expire_date": "11/09/2021",
+    "expire_status": "Expires In < 60 Days",
+    "expire_status_css": "text-bl-text-main bg-gray-100 text-center",
+    "product_id": "PREM_IOLS_TOT",
+  },
+  Object {
+    "description4": "premium item 1 30 days",
+    "expire_date": "11/08/2021",
+    "expire_status": "Expires In < 30 Days",
+    "expire_status_css": "text-yellow-300 bg-gray-100 font-bold text-center",
+    "product_id": "PREM_IOLS_TOT",
+  },
+  Object {
+    "description4": "standard item 1 30 days",
+    "expire_date": "10/31/2021",
+    "expire_status": "Expires In < 30 Days",
+    "expire_status_css": "text-yellow-300 bg-gray-100 font-bold text-center",
+    "product_id": "STAND_IOLS_TOT",
+  },
+  Object {
+    "description4": "premium item 60 days",
+    "expire_date": "11/10/2021",
+    "expire_status": "Expires In < 60 Days",
+    "expire_status_css": "text-bl-text-main bg-gray-100 text-center",
+    "product_id": "PREM_IOLS_TOT",
+  },
+  Object {
+    "description4": "premium item 60 days",
+    "expire_date": "11/11/2021",
+    "expire_status": "Expires In < 60 Days",
+    "expire_status_css": "text-bl-text-main bg-gray-100 text-center",
+    "product_id": "PREM_IOLS_TOT",
+  },
+  Object {
+    "description4": "standard item 60 days",
+    "expire_date": "12/08/2021",
+    "expire_status": "Expires In < 60 Days",
+    "expire_status_css": "text-bl-text-main bg-gray-100 text-center",
+    "product_id": "STAND_IOLS_TOT",
+  },
+  Object {
+    "description4": "premium item >60 days",
+    "expire_date": "01/10/2022",
+    "expire_status": "",
+    "expire_status_css": "text-current",
+    "product_id": "PREM_IOLS_TOT",
+  },
+  Object {
+    "description4": "premium item >60 days",
+    "expire_date": "01/11/2022",
+    "expire_status": "",
+    "expire_status_css": "text-current",
+    "product_id": "PREM_IOLS_TOT",
+  },
+  Object {
+    "description4": "standard item >60 days",
+    "expire_date": "01/08/2022",
+    "expire_status": "",
+    "expire_status_css": "text-current",
+    "product_id": "STAND_IOLS_TOT",
+  },
+]
+`;
+
+exports[`ExpirationCalculations filterRecords should only return records with a specific product id 1`] = `
+Array [
+  Object {
+    "expire_date": 2021-12-20T06:00:00.000Z,
+    "item": "standard item 1 border case",
+    "product_id": "STAND_IOLS_TOT",
+  },
+  Object {
+    "expire_date": 2021-12-21T06:00:00.000Z,
+    "item": "standard item 2",
+    "product_id": "STAND_IOLS_TOT",
+  },
+  Object {
+    "expire_date": 2022-12-25T06:00:00.000Z,
+    "item": "standard item 3",
+    "product_id": "STAND_IOLS_TOT",
+  },
+]
+`;
+
+exports[`ExpirationCalculations groupConsignments should return the correct number of < 30 lenses 1`] = `
+Array [
+  Object {
+    "between30and60": 1,
+    "description4": "premium item 1 30 days",
+    "lessThan30": 1,
+    "moreThan60": 0,
+    "tooLate": 0,
+    "total": 2,
+  },
+  Object {
+    "between30and60": 0,
+    "description4": "standard item 1 30 days",
+    "lessThan30": 1,
+    "moreThan60": 0,
+    "tooLate": 0,
+    "total": 1,
+  },
+]
+`;
+
+exports[`ExpirationCalculations groupConsignments should return the correct number of < 60 lenses 1`] = `
+Array [
+  Object {
+    "between30and60": 2,
+    "description4": "premium item 60 days",
+    "lessThan30": 0,
+    "moreThan60": 0,
+    "tooLate": 0,
+    "total": 2,
+  },
+  Object {
+    "between30and60": 1,
+    "description4": "standard item 60 days",
+    "lessThan30": 0,
+    "moreThan60": 0,
+    "tooLate": 0,
+    "total": 1,
+  },
+]
+`;
+
+exports[`ExpirationCalculations groupConsignments should return the correct number of > 60 lenses 1`] = `
+Array [
+  Object {
+    "between30and60": 0,
+    "description4": "premium item >60 days",
+    "lessThan30": 0,
+    "moreThan60": 2,
+    "tooLate": 0,
+    "total": 2,
+  },
+  Object {
+    "between30and60": 0,
+    "description4": "standard item >60 days",
+    "lessThan30": 0,
+    "moreThan60": 1,
+    "tooLate": 0,
+    "total": 1,
+  },
+]
+`;
+
+exports[`ExpirationCalculations groupConsignments should return the correct number of expired lenses 1`] = `
+Array [
+  Object {
+    "between30and60": 0,
+    "description4": "premium item 1 border case",
+    "lessThan30": 0,
+    "moreThan60": 0,
+    "tooLate": 2,
+    "total": 2,
+  },
+  Object {
+    "between30and60": 0,
+    "description4": "standard item 1 border case",
+    "lessThan30": 0,
+    "moreThan60": 0,
+    "tooLate": 1,
+    "total": 1,
+  },
+]
+`;

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BulkSqlWithCreate #createSchema should call with correct sql to create a schema 1`] = `"CREATE SCHEMA schema name;"`;
+
+exports[`BulkSqlWithCreate createTable should call with correct sql to create a table 1`] = `
+"CREATE TABLE schema name.table name
+sqlLabelString char(5),
+sqlLabelNumber integer,
+sqlLabelDate date
+);"
+`;
+
+exports[`BulkSqlWithCreate delete should call with correct sql to delete data 1`] = `
+"DELETE from schema name.table name WHERE uuid IN (    
+'1uuid',    
+'2uuid',    
+'3uuid',    
+'4uuid',    
+'5uuid');"
+`;
+
+exports[`BulkSqlWithCreate fill should call bulk fill with the correct parameters 1`] = `
+"INSERT INTO schema name.table name VALUES
+
+( 'string', 57, '10/10/2021'),
+( 'another string', 65, '10/11/2021'),
+( 'also a string', 123, '10/12/2021')"
+`;

@@ -1,0 +1,304 @@
+import express from 'express';
+import cors from "cors";
+import path from "path";
+import expressLogging from 'express-logging';
+import ExpressWs from 'express-ws';
+import logger from 'logops'
+
+import {
+  customerContactDataMapping,
+  ItemMatchStatus, prefix,
+  uploadHeaders, dataTableNames, notifyPaths,
+} from "@trac/datatypes";
+import ApiConfiguration from "./app/ApiConfiguration";
+import {iolDataMapping} from "@trac/datatypes";
+import {auditTableNames, errorHandler, NotificationsServer, PostgresClient} from "@trac/postgresql";
+import {UploadWizardProvider} from "./app/upload/UploadWizardProvider";
+import UploadDataAnalysis from "./app/upload/UploadDataAnalysis";
+import AuditTransformer from "./app/upload/AuditTransformer";
+import UploadAuditAnalysis from "./app/upload/UploadAuditAnalysis";
+import AuditCommit from "./app/upload/AuditCommit";
+import GetData from "./app/GetData";
+import GetAuditData from "./app/GetAuditData";
+import UploadStoreManagement from "./app/datastore/UploadStoreManagement";
+import StoreAuditNoteOrItem from "./app/StoreAuditNoteOrItem";
+import {UploadDataTransformer} from "./app/upload/UploadDataTransformer";
+import {DownloadSpreadsheet} from "./app/DownloadSpreadsheet";
+import yargs, {exit} from "yargs";
+import util from "util";
+import DownloadPdf from "./app/DownloadPdf";
+import GetSalesReps from "./app/GetSalesReps";
+import {UploadDataCommit} from "./app/upload/UploadDataCommit";
+import GetAndUpdateProducts from "./app/GetAndUpdateProducts";
+import GetSqlServerDataHttps from "./app/GetSqlServerDataHttps";
+import {TediousClient} from "@trac/tedious";
+import RefreshData from "./app/RefreshData";
+import TransferMssqlData from "./app/TransferMssqlData";
+import {TransformData} from "./app/datastore/TransformData";
+import {FindDuplicates} from "./app/datastore/FindDuplicates";
+import RemoveAudit from "./app/RemoveAudit";
+import {EmailSender} from "./app/emails/EmailSender";
+import Settings from "./app/datastore/Settings";
+import ChangeSettings from "./app/ChangeSettings";
+import ScheduleBatches from "./app/emails/ScheduleBatches";
+import GeneratePdf from "./app/emails/GeneratePdf";
+import CreateEmail from "./app/emails/CreateEmail";
+import AccountCalculations from "./app/AccountCalculations";
+import UserOps from './app/UserOps';
+
+const dump = (obj, depth = null) => util.inspect(obj, {depth, colors: true});
+
+const argv = yargs(process.argv.slice(2))
+  .options({
+    configPath: {
+      type: 'string',
+      default: path.join(process.cwd(), 'config'),
+      describe: 'path to the database configuration'
+    }
+  })
+  .help('?')
+  .alias('?', 'help')
+  .argv;
+console.log(`argv ${dump(argv)}`);
+const dbConfigPath = path.join(argv['configPath'], 'dbConfig.json');
+const tediousConfigPath = path.join(argv['configPath'], 'tediousConfig.json');
+const uploadConfigPath = path.join(argv['configPath'], 'uploadConfig.json');
+const mailConfigPath = path.join(argv['configPath'], 'mailConfig.json');
+const templatesPath = path.join(argv['configPath'], 'templates');
+let postgresClient, configurations, tediousClient;
+const expressWs = ExpressWs(express());
+const app = expressWs.app;
+const notificationServer = new NotificationsServer();
+//This is used for the docker healthcheck 'curl -f http://localhost:1234/api/welcome'
+app.use(cors({
+  exposedHeaders: [uploadHeaders.tokenHeader, 'Content-Disposition'],
+}));
+// use json body parsing
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
+const DEFAULT_PORT = 1234;
+const port = process.env.PORT || DEFAULT_PORT;
+const address = process.env.ADDRESS || 'localhost';
+
+app.use(express.static(__dirname + '/public'));
+app.use(errorHandler);
+app.use(expressLogging(logger));
+
+
+const checkPostgresqlDB = async () => {
+  let connected = false;
+  configurations = await ApiConfiguration.initialize({
+    dbConfigFile: dbConfigPath,
+    uploadFile: uploadConfigPath,
+    tediousConfigFile: tediousConfigPath,
+    mailFile: mailConfigPath,
+    templatesPath
+  });
+  // console.log(`db configuration is ${dump(configurations.postgresConfig.config)}`)
+  postgresClient = new PostgresClient(configurations.postgresConfig);
+  let retries = 0;
+  while (!connected && retries < 20) {
+    try {
+      const client = await postgresClient.getClient();
+      postgresClient.release(client);
+      connected = true
+    } catch (err) {
+      retries += 1;
+      console.error(`connection to db failed retrying ${retries}`);
+      await new Promise(res => setTimeout(res, 8000));
+    }
+  }
+  if (!connected) {
+    exit(2, new Error('could not connect to db'));
+  }
+}
+const checkMssqlDb = async () => {
+  let connected = false;
+  let retries = 0;
+  // console.log(`tedious configuration is ${dump(configurations.tediousConfig)}`)
+  tediousClient = new TediousClient(configurations.tediousConfig);
+  while (!connected && retries < 3) {
+    try {
+      const request = await tediousClient.getRequest();
+      tediousClient.release(request);
+      tediousClient.disconnect();
+      connected = true;
+    } catch (err) {
+      retries += 1;
+      console.error(`connection to sql server failed retrying ${retries} ${err.message}`);
+      await new Promise(res => setTimeout(res, 8000));
+    }
+  }
+}
+const initialize = async () => {
+  await checkPostgresqlDB();
+  await checkMssqlDb();
+  const dataStore = new UploadStoreManagement(configurations.uploadConfig);
+  const settings = await Settings.initialize(configurations.uploadConfig);
+  const getAuditData = new GetAuditData(configurations.postgresConfig, dataTableNames.customers);
+  const generatePdf = new GeneratePdf(configurations, postgresClient, settings, dataTableNames.customers, getAuditData,
+    dataTableNames.consignments);
+  const createEmail = CreateEmail.initialze(generatePdf, configurations, postgresClient, dataTableNames.customers)
+  const emailScheduler = new ScheduleBatches(settings, configurations, postgresClient, generatePdf, createEmail,
+    dataTableNames.customers, dataTableNames.customerContacts, dataTableNames.salesJumpTable, dataTableNames.salesReps)
+  const iolUpload = new UploadWizardProvider(
+    configurations.uploadManager,
+    'iol_report',
+    new UploadDataTransformer(dataStore, configurations.postgresConfig.getSchemaName(), dataTableNames.iol, notificationServer),
+    new UploadDataCommit(dataStore, configurations.postgresConfig.getSchemaName(), dataTableNames.iol, null, notificationServer),
+    new UploadDataAnalysis(dataStore, configurations.postgresConfig.getSchemaName(), dataTableNames.iol),
+    notificationServer
+  )
+  const customerContactUpload = new UploadWizardProvider(
+    configurations.uploadManager,
+    'customer_contact_data',
+    new UploadDataTransformer(dataStore, configurations.postgresConfig.getSchemaName(),
+      dataTableNames.customerContacts),
+    new UploadDataCommit(dataStore, configurations.postgresConfig.getSchemaName(), dataTableNames.customerContacts,
+      emailScheduler),
+    new UploadDataAnalysis(dataStore, configurations.postgresConfig.getSchemaName(), dataTableNames.customerContacts)
+  )
+
+  const refreshData = new RefreshData(configurations.postgresConfig.getSchemaName(), configurations.uploadManager,
+    emailScheduler, notificationServer);
+  const downloadPdf = new DownloadPdf(configurations, generatePdf, createEmail);
+  const getData = new GetData(configurations.postgresConfig, 'consignments', dataTableNames.customers,
+    dataTableNames.customerContacts, dataTableNames.salesMappings);
+
+  app.post(`/${prefix}/upload/iol_report/submit`, iolUpload.configuredMiddleware(),
+    iolUpload.upload(postgresClient, iolDataMapping));
+  app.get(`/${prefix}/upload/iol_report/comparisons`, iolUpload.comparisons());
+  app.post(`/${prefix}/upload/iol_report/commit`, iolUpload.commit(postgresClient));
+  app.post(`/${prefix}/upload/iol_report/cancel`, iolUpload.cancel());
+  app.ws(notifyPaths['iolUpload'], notificationServer.controlMessage('iolUpload'));
+
+  app.post(`/${prefix}/upload/customer_contact_data/submit`, customerContactUpload.configuredMiddleware(),
+    customerContactUpload.upload(postgresClient, customerContactDataMapping));
+  app.get(`/${prefix}/upload/customer_contact_data/comparisons`, customerContactUpload.comparisons());
+  app.post(`/${prefix}/upload/customer_contact_data/commit`, customerContactUpload.commit(postgresClient));
+  app.post(`/${prefix}/upload/customer_contact_data/cancel`, customerContactUpload.cancel());
+
+  app.post(`/${prefix}/upload/refresh`, refreshData.refreshHttp(postgresClient));
+  app.get(`/${prefix}/upload/history`, configurations.uploadManager.history());
+
+  app.post(`/${prefix}/search`, getData.search(postgresClient));
+  const downloadSpreadsheet = new DownloadSpreadsheet();
+  app.post(`/${prefix}/download/spreadsheet`, downloadSpreadsheet.convertToSpreadsheet());
+  app.post(`/${prefix}/download/pdf/audit`, downloadPdf.getPdf(false));
+  app.post(`/${prefix}/download/pdf/consignment`, downloadPdf.getPdf(true));
+
+  const iolDuplicates = new FindDuplicates(configurations.postgresConfig.getSchemaName());
+  app.get(`/${prefix}/iol/duplicates`, iolDuplicates.duplicates(postgresClient));
+  app.get(`/${prefix}/consignments`, getData.getConsignments(postgresClient));
+  app.get(`/${prefix}/consignments/:customerId`, getData.getConsignments(postgresClient));
+
+  app.get(`/${prefix}/customers`, getData.getCustomers(postgresClient));
+  app.get(`/${prefix}/customers/uuid/:uuid`, getData.getCustomers(postgresClient));
+  app.get(`/${prefix}/customers/customerId/:customerId`, getData.getCustomers(postgresClient));
+
+  const getSalesRepData = new GetSalesReps(configurations.postgresConfig, dataTableNames.salesJumpTable,
+    'salesreps')
+  app.get(`/${prefix}/customers`, getData.getCustomers(postgresClient));
+  app.get(`/${prefix}/customers/uuid/:uuid`, getData.getCustomers(postgresClient));
+  app.get(`/${prefix}/customers/customerId/:customerId`, getData.getCustomers(postgresClient));
+  app.get(`/${prefix}/customers/salesrepId/:salesrepId`, getSalesRepData.getCustomersForSalesRep(postgresClient));
+
+  app.get(`/${prefix}/customerContacts`, getData.getCustomerContacts(postgresClient));
+  app.get(`/${prefix}/customerContacts/uuid/:uuid`, getData.getCustomerContacts(postgresClient));
+  app.get(`/${prefix}/customerContacts/customerId/:customerId`, getData.getCustomerContacts(postgresClient));
+
+  app.get(`/${prefix}/salesMappings`, getData.getSalesMappings(postgresClient));
+  app.get(`/${prefix}/salesMappings/uuid/:uuid`, getData.getSalesMappings(postgresClient));
+  app.get(`/${prefix}/salesMappings/customerId/:customerId`, getData.getSalesMappings(postgresClient));
+
+  app.get(`/${prefix}/salesreps`, getSalesRepData.getSalesReps(postgresClient));
+  app.get(`/${prefix}/salesreps/uuid/:uuid`, getSalesRepData.getSalesReps(postgresClient));
+  const productCalculations = new AccountCalculations(configurations.postgresConfig, dataTableNames.consignments,
+    dataTableNames.customers, dataTableNames.salesJumpTable)
+  app.post(`/${prefix}/salesreps/accounts/`, productCalculations.getAccountCalculations(postgresClient,
+    false));
+  app.get(`/${prefix}/salesreps/salesrepId/:salesrepId`, getSalesRepData.getSalesReps(postgresClient));
+  app.get(`/${prefix}/salesreps/customerId/:customerId`, getSalesRepData.getSalesRepsForCustomer(postgresClient));
+  app.get(`/${prefix}/salesreps/role/:role`, getSalesRepData.getSalesRepsForRole(postgresClient));
+
+  const getProductData = new GetAndUpdateProducts(configurations.postgresConfig, dataTableNames.products);
+  app.get(`/${prefix}/products`, getProductData.getProducts(postgresClient));
+  app.get(`/${prefix}/products/uuid/:uuid`, getProductData.getProducts(postgresClient));
+  app.post(`/${prefix}/products`, getProductData.update(postgresClient));
+
+  app.get(`/${prefix}/audit/locations`, getAuditData.getAuditLocations(postgresClient));
+  app.get(`/${prefix}/audit/open`, getAuditData.getOpenAudits(postgresClient));
+  app.get(`/${prefix}/audit`, getAuditData.getAudit(postgresClient));
+  app.post(`/${prefix}/audit/accounts/`, productCalculations.getAccountCalculations(postgresClient,
+    true));
+
+  const storeAuditStuff = new StoreAuditNoteOrItem(configurations.postgresConfig.getAuditSchemaName())
+  const removeAudit = new RemoveAudit(configurations.postgresConfig)
+  app.post(`/${prefix}/audit`, storeAuditStuff.updateAudit(postgresClient));
+  app.delete(`/${prefix}/audit`, removeAudit.removeAudit(postgresClient));
+  app.post(`/${prefix}/audit/notes`, storeAuditStuff.storeNotes(postgresClient));
+  app.post(`/${prefix}/audit/items`, storeAuditStuff.updateItems(postgresClient));
+
+  const auditUpload = new UploadWizardProvider(
+    configurations.uploadManager,
+    'audit_scans',
+    new AuditTransformer(dataStore, configurations.postgresConfig.getAuditSchemaName(),
+      auditTableNames.items, auditTableNames.locations,
+      `${configurations.postgresConfig.getSchemaName()}.consignments`,
+      new ItemMatchStatus()),
+    new AuditCommit(dataStore, configurations.postgresConfig.getAuditSchemaName(), auditTableNames.locations, auditTableNames.items, auditTableNames.notes),
+    new UploadAuditAnalysis(dataStore, configurations.postgresConfig.getAuditSchemaName(), auditTableNames.items),
+  )
+  app.post(`/${prefix}/upload/audit_scans/submit`, auditUpload.configuredMiddleware(),
+    auditUpload.upload(postgresClient));
+  app.get(`/${prefix}/upload/audit_scans/comparisons`, auditUpload.comparisons());
+  app.post(`/${prefix}/upload/audit_scans/commit`, auditUpload.commit(postgresClient));
+  app.post(`/${prefix}/upload/audit_scans/cancel`, auditUpload.cancel());
+  
+  const getMssql = new GetSqlServerDataHttps(configurations.tediousConfig);
+  const mssqlTransfer = new TransferMssqlData(configurations.tediousConfig, configurations.postgresConfig,
+    new TransformData(configurations.postgresConfig.getSchemaName(), dataTableNames.salesReps),
+    new TransformData(configurations.postgresConfig.getSchemaName(), dataTableNames.customers),
+    new TransformData(configurations.postgresConfig.getSchemaName(), dataTableNames.products),
+    new TransformData(configurations.postgresConfig.getSchemaName(), dataTableNames.salesMappings),
+    refreshData
+    )
+  app.post(`/${prefix}/refresh`, mssqlTransfer.transferHttp(postgresClient))
+  app.post(`/${prefix}/refresh/customers`, getMssql.getCustomerData(tediousClient))
+  app.post(`/${prefix}/refresh/products`, getMssql.getProductData(tediousClient))
+  app.post(`/${prefix}/refresh/mappings`, getMssql.getSalesMappingData(tediousClient))
+  app.get(`/${prefix}/refresh/salesreps`, getMssql.getSalesRepData(tediousClient))
+  const emailSettings = new ChangeSettings(configurations, settings);
+  app.post(`/${prefix}/settings/email`, emailSettings.changeEmailSettings());
+  app.post(`/${prefix}/settings/upload`, emailSettings.configuredMiddleware(),
+    emailSettings.upload(createEmail));
+  app.get(`/${prefix}/settings/email`, emailSettings.getEmailSetting());
+  const emailSender = new EmailSender(emailScheduler);
+  app.post(`/${prefix}/email/draft`, emailSender.draft());
+  app.post(`/${prefix}/email/send`, emailSender.send());
+  app.get(`/${prefix}/email/missing`, emailSender.getMissingEmails());
+  const userOps = new UserOps(configurations.postgresConfig, dataTableNames.users);
+  app.get(`/${prefix}/users`, userOps.getUsers(postgresClient));
+  app.get(`/${prefix}/users/uuid/:uuid`, userOps.getUsers(postgresClient));
+  app.get(`/${prefix}/users/username/:username`, userOps.getUsers(postgresClient));
+  app.post(`/${prefix}/users/createUser`, userOps.createUser(postgresClient,"test","password"));
+  //app.post(`/${prefix}/users/createUser/username/:username`, userOps.createUser(postgresClient));  
+  //app.post(`/${prefix}/users/createUser/newpwd/:newpwd`, userOps.createUser(postgresClient));
+};
+
+app.get(`/${prefix}/welcome`, cors(), (req, res) => {
+  res.send({message: 'Welcome to trac-api!'});
+});
+
+// enable cross-origin
+initialize()
+  .then(() => {
+// start server
+    const server = app.listen(port, () => {
+      console.log(`    process.env.NODE_ENV: ${process.env.NODE_ENV}`);
+      console.log(`TRAC server listening on: ${address}:${port}`);
+    });
+    server.on('error', console.error);
+  })
+
+

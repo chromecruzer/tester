@@ -1,0 +1,181 @@
+import {PostgresClient, PostgresConfigFactory, SearchTable, tryCatch} from "@trac/postgresql";
+import {getDataFields} from "@trac/datatypes";
+import {StatusCodes} from "http-status-codes";
+import util from "util";
+
+const dump = (obj, depth = null) => util.inspect(obj, {depth, colors: true});
+
+export default class UserOps {
+  //searchTable: SearchTable;
+  tableName: string;
+  selectSql: string;
+
+  constructor(private postgresConfig: PostgresConfigFactory, usersTable: string) {
+    //this.searchTable = new SearchTable(postgresConfig.getSchemaName());
+    this.tableName = `${postgresConfig.getSchemaName()}.${usersTable}`;
+    this.selectSql = `SELECT * FROM ${this.tableName}`;
+  }
+
+  
+
+  public getUsers(postgresClient: PostgresClient) {
+    return tryCatch(async(req, res, next) => {
+      
+      const client = await postgresClient.getClient();
+      const uuid = req.params[getDataFields.uuid] || null;
+      const username = req.params[getDataFields.username] || null;
+      
+      // let sql = `SELECT * FROM ${this.tableName}`;
+      // let lcWhere = ' WHERE ';
+
+      // if(uuid) {
+      //   sql += ` ${lcWhere} uuid='${uuid}'`;
+      //   lcWhere = ' AND ';
+      // }
+
+      // if(username) {
+      //   sql += ` ${lcWhere} username ='${username}'`;
+      // }
+
+      // sql +=';';
+      // console.log("sql1 = " + sql);
+
+      const results = await this.queryUsers(client, uuid, username)
+          .finally(async () => {
+            console.log('trying to disconnect consignment')
+            return postgresClient.release(client);
+          });
+        res.json(results.rows);
+
+      // const results = client.query(sql).then(data => data.rows).catch(err => {
+      //   throw new Error(`Mistake in '${sql}' caused ${err.message}`);
+      // });
+      // res.json(results.rows);
+
+      // const results = client.query(sql).then(data => data.rows).catch(err => {
+      //   throw new Error(`Mistake in '${sql}' caused ${err.message}`);
+      // });
+      // res.json(results.rows);
+
+      // return client.query(sql).then(data => data.rows).catch(err => {
+      //   throw new Error(`Mistake in '${sql}' caused ${err.message}`);
+      // });
+
+    })
+   
+
+  }
+  
+  public getUserByName(postgresClient: PostgresClient) {
+    return tryCatch(async(req, res, next) => {
+      
+															   
+      const client = await postgresClient.getClient();
+      const username = req.params[getDataFields.username] || null;
+      
+      // let sql = `SELECT * FROM ${this.tableName}`;
+      // let lcWhere = ' WHERE ';
+
+      // if(uuid) {
+      //   sql += ` ${lcWhere} uuid='${uuid}'`;
+      //   lcWhere = ' AND ';
+      // }
+
+      // if(username) {
+      //   sql += ` ${lcWhere} username ='${username}'`;
+      // }
+
+      // sql +=';';
+      // console.log("sql1 = " + sql);
+   
+
+			
+  
+      const results = await this.queryUsers(client, null, username)
+          .finally(async () => {
+            console.log('trying to disconnect consignment')
+            return postgresClient.release(client);
+          });
+        res.json(results.rows);
+
+      // const results = client.query(sql).then(data => data.rows).catch(err => {
+      //   throw new Error(`Mistake in '${sql}' caused ${err.message}`);
+      // });
+      // res.json(results.rows);
+
+      // const results = client.query(sql).then(data => data.rows).catch(err => {
+      //   throw new Error(`Mistake in '${sql}' caused ${err.message}`);
+      // });
+      // res.json(results.rows);
+
+      // return client.query(sql).then(data => data.rows).catch(err => {
+      //   throw new Error(`Mistake in '${sql}' caused ${err.message}`);
+      // });
+
+    })
+
+  }
+  
+  
+  
+
+  public async queryUsers(client, uuid: (string | null) = null, username: (string | null) = null) {
+    let sql = this.selectSql;
+    let lcWhere = ' WHERE ';
+    console.log("username = " + username);
+
+    if(uuid) {
+      sql += ` ${lcWhere} uuid='${uuid}'`;
+      lcWhere = ' AND ';
+    }
+
+    if(username) {
+      sql += ` ${lcWhere} username = '${username}'`;
+      console.log("username = " + username);
+    }
+
+    sql +=';';
+
+    console.log("sql4 = " + sql);
+    return client.query(sql).catch(err => {
+      throw new Error(`Mistake in '${sql}' caused ${err.message}`);
+    });
+  }
+
+  public createUser (postgresClient: PostgresClient) {
+    return tryCatch(async(req, res, next) => {
+      
+      const client = await postgresClient.getClient();
+      //const uuid = req.params[getDataFields.uuid] || null;
+      const username = req.body[getDataFields.username] || null;
+      const usrpwd= req.body[getDataFields.newpwd] || null;
+	  
+	  //console.log(req);
+	  //console.log(req.params.length);
+	  //console.log("username: " + username);
+	  //console.log("Password: " + usrpwd);
+
+      if(username === null) {
+        console.log('username cannot be null');
+		return 'Name cannot be null';
+      }
+
+      let sql = `INSERT INTO ${this.tableName} ("username", "userpwd") VALUES ('${username}', '${usrpwd}')`;
+      sql +=';';
+      console.log("Create User : " + sql);
+
+      await client.query(sql).then(data => data.rows);
+	  
+      res.status(StatusCodes.OK);
+      //res.send('OK');	  
+
+    })
+  }
+
+
+
+
+
+
+
+}

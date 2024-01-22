@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploadManager addSession should should handle an error from saveJson 1`] = `[Error: Rejecting store]`;
+
+exports[`UploadManager archiveSession should should handle an error from remove session 1`] = `
+Array [
+  [Error: Rejecting store],
+]
+`;
+
+exports[`UploadManager archiveSession should should handle an error from saveJson 1`] = `
+Array [
+  [Error: Rejecting store],
+]
+`;
+
+exports[`UploadManager archiveSession should transfer a session from user sessions to the archive and add the uuid object 1`] = `
+Array [
+  Object {
+    "date": "a beautiful date",
+    "form": undefined,
+    "name": "/some/uploaded/file/2b/archived",
+    "type": "IolReport",
+    "user": "sirbilliesbe",
+  },
+]
+`;
+
+exports[`UploadManager initialize should handle fs.mkdir errors 1`] = `
+Array [
+  [Error: Cannot create upload folder "audit_scans" in some/root/directory],
+  [Error: Cannot create upload folder "iol_report" in some/root/directory],
+  [Error: Cannot create upload folder "customer_data" in some/root/directory],
+  [Error: Cannot create upload folder "customer_contact_data" in some/root/directory],
+  [Error: Cannot create upload folder "product_data" in some/root/directory],
+  [Error: Cannot create upload folder "sales_mapping_data" in some/root/directory],
+  [Error: Cannot create upload folder "sales_rep_data" in some/root/directory],
+]
+`;
+
+exports[`UploadManager removeSession should should handle an error from remove 1`] = `
+Array [
+  [Error: Cannot remove /some/uploaded/file because Rejecting fs.remove],
+]
+`;

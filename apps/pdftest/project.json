@@ -1,0 +1,57 @@
+{
+  "name": "pdftest",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/pdftest/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/pdftest",
+        "main": "apps/pdftest/src/main.ts",
+        "tsConfig": "apps/pdftest/tsconfig.app.json",
+        "assets": ["apps/pdftest/src/assets"],
+        "target": "node",
+        "compiler": "tsc"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/pdftest/src/environments/environment.ts",
+              "with": "apps/pdftest/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/pdftest/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/pdftest"],
+      "options": {
+        "jestConfig": "apps/pdftest/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "run-script": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "dependsOn": ["build"],
+      "options": {
+        "command": "node dist/apps/pdftest/main.js"
+      }
+    }
+  },
+  "tags": []
+}

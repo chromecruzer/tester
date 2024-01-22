@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GetSalesReps getCustomersForSalesRep should query mappings and call query records correctly 1`] = `
+Array [
+  Array [
+    "SELECT * FROM schemanameFromConfig.sales jump table WHERE salesrep_id = 'sales rep id';",
+  ],
+]
+`;
+
+exports[`GetSalesReps getCustomersForSalesRep should query mappings and call query records correctly 2`] = `
+Array [
+  Array [
+    Object {
+      "query": [MockFunction] {
+        "calls": Array [
+          Array [
+            "SELECT * FROM schemanameFromConfig.sales jump table WHERE salesrep_id = 'sales rep id';",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": Promise {},
+          },
+        ],
+      },
+    },
+    "SELECT * FROM schemanameFromConfig.sales rep table",
+    "customer_code",
+    Object {
+      "ids": Array [
+        "customer1",
+        "customer2",
+      ],
+    },
+  ],
+]
+`;
+
+exports[`GetSalesReps getSalesReps should call query records correctly 1`] = `
+Array [
+  Array [
+    Object {
+      "query": [MockFunction],
+    },
+    "SELECT * FROM schemanameFromConfig.sales rep table",
+    "salesrep_id",
+    Object {
+      "id": null,
+      "uuid": "uuidForSalesRep",
+    },
+  ],
+]
+`;
+
+exports[`GetSalesReps getSalesRepsForCustomer should query mappings and call query records correctly 1`] = `
+Array [
+  Array [
+    "SELECT * FROM schemanameFromConfig.sales jump table WHERE customer_id = 'customer id';",
+  ],
+]
+`;
+
+exports[`GetSalesReps getSalesRepsForCustomer should query mappings and call query records correctly 2`] = `
+Array [
+  Array [
+    Object {
+      "query": [MockFunction] {
+        "calls": Array [
+          Array [
+            "SELECT * FROM schemanameFromConfig.sales jump table WHERE customer_id = 'customer id';",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": Promise {},
+          },
+        ],
+      },
+    },
+    "SELECT * FROM schemanameFromConfig.sales rep table",
+    "salesrep_id",
+    Object {
+      "ids": Array [
+        "salesId1",
+        "salesId2",
+      ],
+    },
+  ],
+]
+`;
+
+exports[`GetSalesReps getSalesRepsForRole should query mappings and call query records correctly 1`] = `
+Array [
+  Array [
+    "SELECT * FROM schemanameFromConfig.sales jump table WHERE customer_id = 'sales rep role';",
+  ],
+]
+`;
+
+exports[`GetSalesReps getSalesRepsForRole should query mappings and call query records correctly 2`] = `
+Array [
+  Array [
+    Object {
+      "query": [MockFunction] {
+        "calls": Array [
+          Array [
+            "SELECT * FROM schemanameFromConfig.sales jump table WHERE customer_id = 'sales rep role';",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": Promise {},
+          },
+        ],
+      },
+    },
+    "SELECT * FROM schemanameFromConfig.sales rep table",
+    "customer_code",
+    Object {
+      "ids": Array [
+        "salesId1",
+        "salesId2",
+      ],
+    },
+  ],
+]
+`;

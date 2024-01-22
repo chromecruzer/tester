@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChangeAuditMatchDialog should save a location 1`] = `
+Array [
+  Array [
+    Object {
+      "address": "123 Mickey Mouse Way",
+      "city": "Orlando",
+      "customer_code": "location code",
+      "name": "West Mall",
+      "postal": "123456",
+      "state": "Florida",
+      "uuid": "customer uuid",
+    },
+  ],
+]
+`;
+
+exports[`ChangeAuditMatchDialog should should submit a location with a match changed to "moved" 1`] = `
+Array [
+  Array [
+    "Recently typed note
+Match changed to Found In Other Location",
+    "Match",
+  ],
+]
+`;
+
+exports[`ChangeAuditMatchDialog should should submit a location with a match changed to "moved" 2`] = `
+Array [
+  Array [
+    "location uuid",
+    "location code",
+  ],
+]
+`;
+
+exports[`ChangeAuditMatchDialog should should submit a match change 1`] = `
+Array [
+  Array [
+    "Recently typed note
+Match changed to Billed",
+    "Match",
+  ],
+]
+`;

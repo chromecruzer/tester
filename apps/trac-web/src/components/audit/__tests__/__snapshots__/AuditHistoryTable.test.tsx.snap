@@ -1,0 +1,745 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OpenAudits should display history data correctly 1`] = `
+Array [
+  <tr
+    class="bg-bl-consumer-light"
+    role="row"
+  >
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Location
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Status
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Location Code
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Scan Date
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Close Date
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Auditor
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Scanner
+      </span>
+    </th>
+  </tr>,
+  <tr
+    class=" border-2 border-gray-100 cursor-pointer"
+    role="row"
+  >
+    <td
+      class="  "
+      role="cell"
+    >
+      Oh No I am under audit
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      OPEN
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      location1
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      06/01/2022
+    </td>
+    <td
+      class="  "
+      role="cell"
+    />
+    <td
+      class="  "
+      role="cell"
+    >
+      Becky Counter
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Mike Scanner
+    </td>
+  </tr>,
+  <tr
+    class=" border-2 border-gray-100 cursor-pointer"
+    role="row"
+  >
+    <td
+      class="  "
+      role="cell"
+    >
+      I got nuttin to hide
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      OPEN
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      location13
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      05/23/2022
+    </td>
+    <td
+      class="  "
+      role="cell"
+    />
+    <td
+      class="  "
+      role="cell"
+    >
+      Becky Counter
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Bubba Scanner
+    </td>
+  </tr>,
+  <tr
+    class=" border-2 border-gray-100 cursor-pointer"
+    role="row"
+  >
+    <td
+      class="  "
+      role="cell"
+    >
+      Oh No I am under audit
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      CLOSED
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      location1
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      03/01/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      08/17/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Priscilla Counter
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Mike Scanner
+    </td>
+  </tr>,
+  <tr
+    class=" border-2 border-gray-100 cursor-pointer"
+    role="row"
+  >
+    <td
+      class="  "
+      role="cell"
+    >
+      I got nuttin to hide
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      CLOSED
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      location13
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      03/06/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      08/19/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Priscilla Counter
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Bubba Scanner
+    </td>
+  </tr>,
+  <tr
+    class=" border-2 border-gray-100 cursor-pointer"
+    role="row"
+  >
+    <td
+      class="  "
+      role="cell"
+    >
+      My books are clean
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      CLOSED
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      location2
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      02/14/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      06/17/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Priscilla Counter
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Mary Lou Scanner
+    </td>
+  </tr>,
+]
+`;
+
+exports[`OpenAudits should filter CLOSED items 1`] = `
+Array [
+  <tr
+    class="bg-bl-consumer-light"
+    role="row"
+  >
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Location
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Status
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Location Code
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Scan Date
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Close Date
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Auditor
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Scanner
+      </span>
+    </th>
+  </tr>,
+  <tr
+    class=" border-2 border-gray-100 cursor-pointer"
+    role="row"
+  >
+    <td
+      class="  "
+      role="cell"
+    >
+      Oh No I am under audit
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      CLOSED
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      location1
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      03/01/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      08/17/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Priscilla Counter
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Mike Scanner
+    </td>
+  </tr>,
+  <tr
+    class=" border-2 border-gray-100 cursor-pointer"
+    role="row"
+  >
+    <td
+      class="  "
+      role="cell"
+    >
+      I got nuttin to hide
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      CLOSED
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      location13
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      03/06/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      08/19/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Priscilla Counter
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Bubba Scanner
+    </td>
+  </tr>,
+  <tr
+    class=" border-2 border-gray-100 cursor-pointer"
+    role="row"
+  >
+    <td
+      class="  "
+      role="cell"
+    >
+      My books are clean
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      CLOSED
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      location2
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      02/14/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      06/17/2021
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Priscilla Counter
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Mary Lou Scanner
+    </td>
+  </tr>,
+]
+`;
+
+exports[`OpenAudits should filter OPEN items 1`] = `
+Array [
+  <tr
+    class="bg-bl-consumer-light"
+    role="row"
+  >
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Location
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Status
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Location Code
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Scan Date
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Close Date
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Auditor
+      </span>
+    </th>
+    <th
+      colspan="1"
+      role="columnheader"
+      style="cursor: pointer;"
+      title="Toggle SortBy"
+    >
+      <span
+        class="flex items-center px-1"
+      >
+        Scanner
+      </span>
+    </th>
+  </tr>,
+  <tr
+    class=" border-2 border-gray-100 cursor-pointer"
+    role="row"
+  >
+    <td
+      class="  "
+      role="cell"
+    >
+      Oh No I am under audit
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      OPEN
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      location1
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      06/01/2022
+    </td>
+    <td
+      class="  "
+      role="cell"
+    />
+    <td
+      class="  "
+      role="cell"
+    >
+      Becky Counter
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Mike Scanner
+    </td>
+  </tr>,
+  <tr
+    class=" border-2 border-gray-100 cursor-pointer"
+    role="row"
+  >
+    <td
+      class="  "
+      role="cell"
+    >
+      I got nuttin to hide
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      OPEN
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      location13
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      05/23/2022
+    </td>
+    <td
+      class="  "
+      role="cell"
+    />
+    <td
+      class="  "
+      role="cell"
+    >
+      Becky Counter
+    </td>
+    <td
+      class="  "
+      role="cell"
+    >
+      Bubba Scanner
+    </td>
+  </tr>,
+]
+`;

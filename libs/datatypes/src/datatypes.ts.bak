@@ -1,0 +1,157 @@
+import {ProductSignature} from "./ProductRecord";
+import {CustomerSignature} from "./CustomerRecord";
+import {IolSignature} from "./IolRecord";
+import {ConsignmentSignature} from "./ConsignmentRecord";
+import {DateTime} from "luxon";
+import _ from "lodash";
+
+export type InputDataTypeLabel = ('string' | 'number' | 'date' | 'boolean');
+export type InputDataType = (string | number | Date | boolean);
+export type NullableString = (string | null);
+export type NullableDate= (Date | null);
+export type StringMap = {[id: string]: string};
+export type BooleanMap = {[id: string]: boolean};
+export type RecordSignature = (ConsignmentSignature | CustomerSignature
+  | ProductSignature | IolSignature);
+export interface MatchedField {
+  field: string;
+  uuid: string;
+  type: string;
+  signature: RecordSignature;
+}
+export interface InputToSqlMapping {
+  xlsxAddress?: string;
+  dataType: InputDataTypeLabel;
+  sqlLabel: string;
+  sqlType: string;
+  nullify?: (string) => (InputDataType | null); // function to replace certain strings with null
+  default?: InputDataType; // default for fields that are not in the spreadsheet
+}
+export enum SalesRoles {
+  ASD = 'ASD',
+  RBD = 'RBD',
+  POS = 'POS',
+  KAE = 'KAE',
+  RTM = 'RTM',
+  SES = 'SES',
+  SIR = 'SIR',
+  STM = 'STM',
+  COS = 'COS',
+  RBDSx = 'RBD - Sx',
+  ASTM = 'ASTM'
+}
+export interface RepsWithTerritories {
+  rep_name: string;
+  territory_id: string
+  geo: string;
+  reports_to: string;
+  role: SalesRoles,
+  ship_to: string,
+}
+
+export const getDataFields = {
+  auditStatus: 'status',
+  customerId: 'customerId',
+  macros: 'macros',
+  date: 'date',
+  filters: 'filters',
+  flag: 'flag',
+  headers: 'headers',
+  items: 'items',
+  location: 'locationCode',
+  match: 'match',
+  price: 'price',
+  role: 'role',
+  salesrepId: 'salesrepId',
+  searchText: 'searchText',
+  spreadsheet: 'spreadsheet',
+  spreadsheet0: 'spreadsheet0',
+  subject: 'subject',
+  testEmails: 'testEmails',
+  type: 'type',
+  uuid: 'uuid',
+  warehouse: 'warehouse',
+  withName: 'withName',
+  settings: 'settings',
+  emailTemplateType: 'emailTemplateType',
+  emailOrder: 'order',
+  username: 'username',
+  userpwd: 'userpwd',
+  newpwd: 'newpwd',
+}
+export interface SearchFilters {
+  customers: false,
+  consignments: false,
+  iol_reports: false,
+  products: false,
+}
+
+export const prefix = 'api'; //used by nginx to proxy to the trac-api server
+
+export const tracDateFormat = 'LL/dd/yyyy';
+export const formatTracDate = date => {
+  return DateTime.fromJSDate(new Date(date)).toFormat(tracDateFormat)
+}
+export const dateNow = () => DateTime.now().toJSDate();
+export const spaceNull = words => {
+  const isWord = /\w+/;
+  return isWord.test(words) ? words : null;
+}
+
+export const removeTrailingSpace = words => {
+  const trailingSpace = /\s+$/;
+  return words.replace(trailingSpace, '');
+}
+export const dateToTimestamp = (tracDate) => {
+  // console.log(`converting ${tracDate} from ${DateTime.fromFormat(tracDate, tracDateFormat)} to ${result}`);
+  return _.isString(tracDate) ? DateTime.fromFormat(tracDate, tracDateFormat).toISO() : null;
+}
+//  (rowA: Row<TData>, rowB: Row<TData>, columnId: string): number
+export const dateCompare = (a, b, colId) => {
+  // console.log('checking', a, b);
+  const dateA = a[colId] !== '' ? DateTime.fromFormat(a[colId], tracDateFormat) : null;
+  const dateB = b[colId] !== '' ? DateTime.fromFormat(b[colId], tracDateFormat) : null;
+  switch (true) {
+    case dateA === null && dateB === null:
+      // console.log('both are null', a, b);
+      return 0;
+    case dateA !== null && dateB === null:
+      // console.log('b is null', a, b);
+      return 1;
+    case (dateA as DateTime) > (dateB as DateTime):
+      // console.log('a is newer than b', (dateA as DateTime).valueOf(), (dateB as DateTime).valueOf())
+      return 1;
+    case dateA == null && dateB !== null:
+      // console.log('a is null', a, b);
+      return -1;
+    case (dateA as DateTime) < (dateB as DateTime):
+      // console.log('a is older than b', (dateA as DateTime).valueOf(), (dateB as DateTime).valueOf())
+      return -1;
+    default:
+      // console.log('leftovers')
+      return 0;
+  }
+
+}
+export const dataTableNames = {
+  iol: 'iol',
+  consignments: 'consignments',
+  customers: 'customers',
+  customerContacts: 'customer_contacts',
+  salesReps: 'salesreps',
+  salesMappings: 'salesmappings',
+  products: 'products',
+  salesJumpTable: 'salesjumptable',
+  users: 'users',
+}
+export type DataTableNameType = (
+  'iol' |
+  'consignments' |
+  'customers' |
+  'customerContacts' |
+  'salesReps' |
+  'salesMappings' |
+  'products' |
+  'salesJumpTable' |
+  'users'
+  );

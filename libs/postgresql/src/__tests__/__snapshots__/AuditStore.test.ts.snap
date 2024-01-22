@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuditStore storeNotes should store multiple notes correctly 1`] = `
+"INSERT INTO name of the schema.auditnotes VALUES (gen_random_uuid(),
+    '07/04/2022',
+    'Dickens',
+    'Item',
+    'uuid-of-the-note-target',
+    'uuid-of-the-audit',
+    'note that show the content\\\\n        with an embedded return'),
+(gen_random_uuid(),
+    '07/11/2022',
+    'Shakespeare',
+    'Audit',
+    'uuid-of-the-note-target2',
+    'uuid-of-the-audit2',
+    'note that show the content'),
+(gen_random_uuid(),
+    '07/04/2022',
+    'Verne',
+    'Match',
+    'uuid-of-the-note-target3',
+    'uuid-of-the-audit3',
+    'note that show the content\\\\n        with an embedded\\\\n        returns');"
+`;
+
+exports[`AuditStore storeNotes should store one note correctly 1`] = `
+"INSERT INTO name of the schema.auditnotes VALUES (gen_random_uuid(),
+    '07/04/2022',
+    'Dickens',
+    'Item',
+    'uuid-of-the-note-target',
+    'uuid-of-the-audit',
+    'note that show the content\\\\n        with an embedded');"
+`;
+
+exports[`AuditStore updateItems should update multiple audit items correctly 1`] = `"UPDATE name of the schema.audititem SET audit_match = 'Billed' WHERE uuid IN ('uuid1','uuid2','uuid3');"`;
+
+exports[`AuditStore updateItems should update multiple audit items with consignment location correctly 1`] = `
+"UPDATE name of the schema.audititem SET audit_match = 'Found In Another Location', consignment_uuid = 'uuid of the consignment', consignment_location = 'location of the consignment',
+      confirmed_date = '07/20/2022', confirmed_by = 'Nutall'  WHERE uuid IN ('uuid1','uuid2','uuid3');"
+`;
+
+exports[`AuditStore updateItems should update one audit item correctly 1`] = `"UPDATE name of the schema.audititem SET audit_match = 'Billed' WHERE uuid='uuid1';"`;

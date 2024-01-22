@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotesPanelState getNotes should filter notes by item 1`] = `
+Array [
+  Object {
+    "annotate_type": "Item",
+    "annotated_uuid": "item",
+  },
+  Object {
+    "annotate_type": "Match",
+    "annotated_uuid": "item",
+  },
+]
+`;
+
+exports[`NotesPanelState getNotes should return all notes if specified 1`] = `
+Array [
+  Object {
+    "annotate_type": "Audit",
+    "annotated_uuid": "audit1",
+  },
+  Object {
+    "annotate_type": "Audit",
+    "annotated_uuid": "audit2",
+  },
+  Object {
+    "annotate_type": "Item",
+    "annotated_uuid": "item",
+  },
+  Object {
+    "annotate_type": "Match",
+    "annotated_uuid": "item",
+  },
+  Object {
+    "annotate_type": "Item",
+    "annotated_uuid": "other item",
+  },
+]
+`;
+
+exports[`NotesPanelState getNotes should return only audit notes 1`] = `
+Array [
+  Object {
+    "annotate_type": "Audit",
+    "annotated_uuid": "audit1",
+  },
+  Object {
+    "annotate_type": "Audit",
+    "annotated_uuid": "audit2",
+  },
+]
+`;

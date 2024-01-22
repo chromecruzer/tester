@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GetAuditData getAuditLocations should query a request an audit status correctly 1`] = `
+Array [
+  Array [
+    "SELECT * FROM AUDIT SCHEMA.auditlocation AS audit WHERE audit.status='AUDIT STATUS';",
+  ],
+]
+`;
+
+exports[`GetAuditData getAuditLocations should query a request for all correctly 1`] = `
+Array [
+  Array [
+    "SELECT * FROM AUDIT SCHEMA.auditlocation AS audit;",
+  ],
+]
+`;
+
+exports[`GetAuditData getAuditLocations should query a request with a location code correctly 1`] = `
+Array [
+  Array [
+    "SELECT * FROM AUDIT SCHEMA.auditlocation AS audit WHERE audit.uuid='audit uuid';",
+  ],
+]
+`;
+
+exports[`GetAuditData getAuditLocations should query a request with a uuid correctly 1`] = `
+Array [
+  Array [
+    "SELECT * FROM AUDIT SCHEMA.auditlocation AS audit WHERE audit.location_code='the customer';",
+  ],
+]
+`;

@@ -1,0 +1,63 @@
+import React from 'react';
+import {
+  Routes,
+  Route, useLocation
+} from 'react-router-dom';
+import IolConsignments from '../pages/IolConsignments';
+import Search from '../pages/Search';
+import SignUp from '../pages/SignUp';
+import ChangePwd from '../pages/ChangePwd';
+import Expiration from "../pages/Expiration";
+import Audit from "../pages/Audit";
+import Customers from "../pages/Customers";
+import {pageMappings} from "./PagesMap";
+import {UploadSubmit} from "../components/upload/UploadSubmit";
+import {DebugRouter} from "./DebugRouter";
+import {UploadDataAnalyticsTable} from "../components/upload/UploadDataAnalyticsTable";
+import DataUpload from "../pages/DataUpload";
+import {OpenAudits} from "../pages/OpenAudits";
+import AuditUpload from "../pages/AuditUpload";
+import {Products} from "../pages/Products";
+import {Products2} from "../pages/Products2";
+import {SalesReps} from "../pages/SalesReps";
+import {IolDuplicates} from "../pages/IolDuplicates";
+import ClearSearch from "../pages/ClearSearch";
+import {EmailSettings} from "../pages/EmailSettings";
+import {Accounts} from "../pages/Accounts";
+import {AuditAccounts} from "../pages/AuditAccounts";
+
+const AppRouter = () => {
+  const location = useLocation();
+   console.log('routing location', location);
+  return (
+    <DebugRouter>
+      <Routes>
+        <Route path={pageMappings['Clear Search']} element={<ClearSearch/>}/>
+        <Route path={pageMappings['Search']} element={<Search/>}/>
+		    <Route path={pageMappings['SignUp']} element={<SignUp/>}/>
+        <Route path={pageMappings['ChangePwd']} element={<ChangePwd/>}/>
+        <Route path={pageMappings['Consignment']} element={<IolConsignments/>}/>
+        <Route path={pageMappings['Expiration']} element={<Expiration/>}/>
+        <Route path={pageMappings['Accounts']} element={<Accounts/>}/>
+        <Route path={pageMappings['Audit Work']} element={<Audit/>}/>
+        <Route path={pageMappings['Audited Accounts']} element={<AuditAccounts/>}/>
+        <Route path={pageMappings['Open Audits']} element={<OpenAudits/>}/>
+        <Route path={pageMappings['Audit Upload']} element={<AuditUpload/>}/>
+        <Route path={pageMappings['Audit Upload Session']} element={<AuditUpload/>}/>
+        <Route path={pageMappings['Data Upload']} element={<DataUpload/>}>
+          <Route index element={<UploadSubmit/>}/>
+          <Route path={pageMappings['Analytics']} element={<UploadDataAnalyticsTable/>}/>
+        </Route>
+        <Route path={pageMappings['Duplicates']} element={<IolDuplicates/>}/>
+        <Route path={pageMappings['Customers']} element={<Customers/>}/>
+        <Route path={pageMappings['Products']} element={<Products/>}/>
+        <Route path={pageMappings['Products2']} element={<Products2/>}/>  
+        <Route path={pageMappings['Sales Reps']} element={<SalesReps/>}/>
+        <Route path={pageMappings['Email Settings']} element={<EmailSettings/>}/>
+        <Route path='*' element={<h4>UNKNOWN PATH</h4>}/>
+      </Routes>
+    </DebugRouter>
+  );
+};
+
+export default AppRouter;

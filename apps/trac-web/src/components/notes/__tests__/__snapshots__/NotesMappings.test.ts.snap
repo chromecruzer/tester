@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotesMapping getItem should get a specified item 1`] = `
+Object {
+  "lot": "this the other item",
+  "uuid": "other item",
+}
+`;
+
+exports[`NotesMapping getNotes should get notes for a specified item 1`] = `
+Array [
+  Object {
+    "annotate_type": "Item",
+    "annotated_uuid": "other item",
+  },
+]
+`;
+
+exports[`NotesMapping getNotes should get notes for a specified item 2`] = `
+Array [
+  Object {
+    "annotate_type": "Item",
+    "annotated_uuid": "item",
+  },
+  Object {
+    "annotate_type": "Match",
+    "annotated_uuid": "item",
+  },
+]
+`;
+
+exports[`NotesMapping should fill out maps correctly 1`] = `
+Object {
+  "item": Object {
+    "lot": "this is an item",
+    "uuid": "item",
+  },
+  "other item": Object {
+    "lot": "this the other item",
+    "uuid": "other item",
+  },
+}
+`;
+
+exports[`NotesMapping should fill out maps correctly 2`] = `
+Object {
+  "item": Array [
+    Object {
+      "annotate_type": "Item",
+      "annotated_uuid": "item",
+    },
+    Object {
+      "annotate_type": "Match",
+      "annotated_uuid": "item",
+    },
+  ],
+  "other item": Array [
+    Object {
+      "annotate_type": "Item",
+      "annotated_uuid": "other item",
+    },
+  ],
+}
+`;

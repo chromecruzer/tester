@@ -1,0 +1,64 @@
+import {SignatureFields} from "./SearchSignature";
+import {removeTrailingSpace, spaceNull} from "./datatypes";
+
+export const userTableColumns = [
+  {
+    header: 'UserName',
+    accessor: 'userName',
+  },
+  {
+    header: 'Password',
+    accessor: 'userPwd',
+  },
+];
+
+export interface UserSignature {
+  userName: string;
+  userPwd: string;
+}
+
+export const initialUserSignature = {
+  uuid: null,
+  userName: null,
+  userPwd: null,
+}
+
+export interface UserRecord {
+  uuid: string;
+  userName: string;
+  userPwd: string;
+}
+
+export const initialUserRecord = {
+  uuid: null,
+  userName: null,
+  userPwd: null,
+}
+
+export const userRecordFromArray = (array: (string | number | Date)[]) => {
+  const result: (string | number | Date)[] = array;
+  return <UserRecord>{
+    userName: removeTrailingSpace(result[0]),
+    userPwd: result[1],
+  }
+}
+
+export const addNewUser = (user): UserRecord => {
+  const result = {...user};
+  // console.log(`New user ${dump(result)}`)
+  return result;
+}
+
+export const userTextSearchFields: SignatureFields = {
+  searchFields: [
+    'userName',
+  ],
+  type: 'users',
+  idFieldFn: () => "userName"
+};
+
+export const matchUserFields = (a,b) => {
+  return a.userName === b.userName &&
+    a.userPwd === b.userPwd;
+}
+

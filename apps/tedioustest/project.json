@@ -1,0 +1,57 @@
+{
+  "name": "tedioustest",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/tedioustest/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/tedioustest",
+        "main": "apps/tedioustest/src/main.ts",
+        "tsConfig": "apps/tedioustest/tsconfig.app.json",
+        "assets": ["apps/tedioustest/src/assets"],
+        "target": "node",
+        "compiler": "tsc"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/tedioustest/src/environments/environment.ts",
+              "with": "apps/tedioustest/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/tedioustest/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/tedioustest"],
+      "options": {
+        "jestConfig": "apps/tedioustest/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "run-script": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "dependsOn": ["build"],
+      "options": {
+        "command": "node dist/apps/tedioustest/main.js"
+      }
+    }
+  },
+  "tags": []
+}

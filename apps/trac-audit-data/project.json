@@ -1,0 +1,57 @@
+{
+  "name": "trac-audit-data",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/trac-audit-data/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/trac-audit-data",
+        "main": "apps/trac-audit-data/src/main.ts",
+        "tsConfig": "apps/trac-audit-data/tsconfig.app.json",
+        "assets": ["apps/trac-audit-data/src/assets"],
+        "target": "node",
+        "compiler": "tsc"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/trac-audit-data/src/environments/environment.ts",
+              "with": "apps/trac-audit-data/src/environments/environment.prod.ts"
+        }
+          ]
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/trac-audit-data/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/trac-audit-data/jest.config.ts",
+        "passWithNoTests": true
+        }
+    },
+    "run-script": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "dependsOn": ["build"],
+      "options": {
+        "command": "node --max_old_space_size=4096 dist/apps/trac-audit-data/main.js"
+      }
+    }
+  },
+  "tags": []
+}

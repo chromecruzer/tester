@@ -1,0 +1,123 @@
+import axios from "axios";
+import {httpRoot} from "../httpConfig";
+import {NullableString, getDataFields, uploadHeaders} from "@trac/datatypes";
+import {UseLoginUser} from "../navigation/UseLoginUser";
+import React, {useContext, useState} from "react";
+
+const userApi = axios.create({
+  baseURL: `${httpRoot}/`,
+})
+
+export const getUsers = async ({
+    uuid = null as NullableString,
+    username = null as NullableString,
+	userpwd = null as  NullableString,
+    action  = null as  NullableString
+  }) => {
+
+    //console.log(`uuid '${uuid}' user '${username}'`)
+    let uri = '/users';
+    if (uuid) {
+        uri += `/uuid/${uuid}`;
+    }
+
+    if (username) {
+      uri += `/username/${username}`
+    }
+
+    //console.log(`getting users from uuid ${uuid}, username ${username} creates ${uri}`)
+    const axiosResponse = await userApi.get(uri);
+	const dbpwd = axiosResponse.data[0].userpwd;
+	if(action === 'login') {
+        return dbpwd;
+    }
+    else {												  
+		return axiosResponse.data;
+	}
+}
+
+export const updatePwd = async ({
+    uuid = null as NullableString,
+    username = null as NullableString,
+    newpwd = null as NullableString
+  }) => {
+
+    console.log(`uuid '${uuid}' user '${username}' pwd '${newpwd}'`)
+    let uri = '/users/updatePwd';
+    if (uuid) {
+        uri += `/uuid/${uuid}`;
+    }
+
+    if (username) {
+    uri += `/username/${username}`
+    }
+
+    if (newpwd) {
+      uri += `/password/${newpwd}`
+    }
+
+  return userApi.post(uri)
+    .then(response => {
+      console.log('Password Updated', response)
+      return response.data;
+    });
+}
+  
+export const createUser = async ({
+    username = null as NullableString,
+    newpwd = null as NullableString,
+  }) => { 
+
+	console.log(`username` + username)
+	console.log(`password` + newpwd)
+    //console.log(`username ${username} newpwd ${newpwd}`)
+    let uri = '/users/createUser';
+
+    //if (username) {
+      //uri += `/username/${username}`
+    //}
+
+    //if (newpwd) {
+      //uri += `/password/${newpwd}`
+    //}
+
+    //console.log(`getting users from username ${username},  Password ${newpwd},  creates ${uri}`)
+    //const axiosResponse = await userApi.post(uri)
+    //return axiosResponse.data;
+    return userApi.post(uri,{username},{newpwd})
+    .then(response => {
+      console.log('New User Created', response)
+      return response.data;
+    });
+}
+
+
+
+//-------------------------
+export interface UploadTemplateType {
+    file: (File | null);
+    userTemplateType: string;
+}
+  
+export const postGetDraft = async (order) => {
+  const uri = '/user/draft';
+  return userApi.post(uri, {order})
+    .then(response => {
+      console.log('draft returned', response)
+      return response.data;
+    });
+}
+
+export const postEmailSettings = async (settings) => {
+  const uri = '/settings/user';
+  return userApi.post(uri, {settings});
+}
+
+
+export const getWelcome = async () => {
+  const uri = 'welcome';
+  const result = await userApi.get(uri);
+  console.log('welcome result', result);
+  return result.data;
+}
+

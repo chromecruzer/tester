@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostgresClient throwError should throw error with specified contents 1`] = `[Error: stage produced an error I quit because that error bugs me]`;

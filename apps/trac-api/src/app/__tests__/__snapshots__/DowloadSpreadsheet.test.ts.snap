@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DownloadSpreadsheet convertToSpreadsheet should create a spreadsheet from headers and data 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "Date Column": "10/02/21",
+        "Number Column": 102,
+        "Text Column": "text1",
+      },
+      Object {
+        "Date Column": "10/02/21",
+        "Number Column": 115,
+        "Text Column": "text2",
+      },
+      Object {
+        "Date Column": "10/12/21",
+        "Number Column": 10.2,
+        "Text Column": "3rd text",
+      },
+      Object {
+        "Date Column": "10/15/21",
+        "Number Column": 12345,
+        "Text Column": "text the fourth",
+      },
+    ],
+  ],
+]
+`;
+
+exports[`DownloadSpreadsheet convertToSpreadsheet should create a spreadsheet from headers and data 2`] = `
+Array [
+  Array [
+    "TracSpreadsheet_newToken.xlsx",
+  ],
+]
+`;

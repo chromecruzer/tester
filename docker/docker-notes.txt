@@ -1,0 +1,23 @@
+alias git="docker run -ti --rm -v $(pwd):/git -v $HOME/.ssh:/root/.ssh alpine/git"
+
+git clone https://BauschSurgical@dev.azure.com/BauschSurgical/TRAC/_git/trac development
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+npm i --legacy-peer-deps
+nx build trac-api
+nx build trac-web
+nx run trac-web:build-css
+
+git archive -o /c/file_transfers/trac-source-0-9-0-1.tar release_0_9_0
+
+docker pull nginx:latest
+docker pull node:lts-alpine
+docker pull postgres:latest
+
+On Windows this does not work in the create-volume script
+ docker run -v C:\Users\bletzim.BLAMERICAS\repos\trac\docker\config:/config -v dev-trac-configs:/var/lib/trac/config \
+ --name trac-copy-config ubuntu bash -c 'cp -v /config/* /var/lib/trac/config'
+ docker run -v C:\Users\bletzim.BLAMERICAS\repos\trac\docker\config:/config -v trac-configs:/var/lib/trac/config \
+ --name trac-copy-config ubuntu bash -c 'cp -v /config/* /var/lib/trac/config'

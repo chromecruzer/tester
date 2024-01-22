@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataStoreUtilities mkdir should reject with an error when ensureDir fails 1`] = `[Error: Cannot create upload folder "whoCares" in whoCares because This did not work]`;
+
+exports[`DataStoreUtilities remove should reject with an error when remove fails 1`] = `[Error: Cannot remove whoCares because This did not work]`;
+
+exports[`DataStoreUtilities retrieve should reject with an error when readJson fails 1`] = `[Error: File whoCares could not be read. This did not work]`;
+
+exports[`DataStoreUtilities store should reject with an error when writeJson fails 1`] = `[Error: Cannot save file whoCares because This did not work]`;

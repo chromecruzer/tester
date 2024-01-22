@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploadDataTransformer #transform should return correct groupings of records 1`] = `
+Array [
+  Array [
+    "session-token",
+    Object {
+      "adds": Array [
+        Object {
+          "address_phone": "200 Donald Duck Street 888-112-1234",
+          "description": "I describe a duck",
+          "expire_date": 2024-10-10T05:00:00.000Z,
+          "item": "duck",
+          "location_code": "LOC2",
+          "lot": "lot1227",
+          "name_code": "nameCode1",
+          "purchase_order": "purchased for the old wolf a duck",
+          "quantity": 1,
+          "received_date": 2021-10-10T05:00:00.000Z,
+          "shipped_date": 2021-10-07T05:00:00.000Z,
+          "warehouse": "CLR22",
+        },
+      ],
+      "modifies": Array [
+        Object {
+          "new": Object {
+            "address_phone": "333 Jack Frost Lane 888-112-1234",
+            "description": "I describe an item1",
+            "expire_date": 2024-10-10T05:00:00.000Z,
+            "item": "item1",
+            "location_code": "LOC1",
+            "lot": "lot1225",
+            "name_code": "nameCode1",
+            "purchase_order": "purchased for dimplewig as item1",
+            "quantity": 1,
+            "received_date": 2021-10-10T05:00:00.000Z,
+            "shipped_date": 2021-10-07T05:00:00.000Z,
+            "uuid": "modified",
+            "warehouse": "CLR34",
+          },
+          "originalUuid": "modified",
+        },
+      ],
+      "removedUuids": Array [
+        "removed",
+      ],
+    },
+  ],
+]
+`;

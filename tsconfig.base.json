@@ -1,0 +1,26 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "noImplicitAny": false,
+    "baseUrl": ".",
+    "paths": {
+      "@trac/datatypes": ["libs/datatypes/src/index.ts"],
+      "@trac/pdfkit": ["libs/pdfkit/src/index.ts"],
+      "@trac/postgresql": ["libs/postgresql/src/index.ts"],
+      "@trac/tedious": ["libs/tedious/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

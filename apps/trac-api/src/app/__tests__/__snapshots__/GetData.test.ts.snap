@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GetData getConsignments should query with the proper SQL when called with a customer ID 1`] = `"SELECT * FROM schemanameFromConfig.consignmentTable WHERE customer_id='idForCustomer';"`;
+
+exports[`GetData getConsignments should query with the proper SQL when called without a customer ID 1`] = `"SELECT * FROM schemanameFromConfig.consignmentTable;"`;
+
+exports[`GetData getCustomers should query with the proper SQL when called with a customer uuid 1`] = `
+Array [
+  Array [
+    Object {
+      "query": [MockFunction],
+    },
+    "SELECT * FROM schemanameFromConfig.customerTable",
+    "customer_code",
+    Object {
+      "id": null,
+      "uuid": "uuidForCustomer",
+    },
+  ],
+]
+`;
+
+exports[`GetData getCustomers should query with the proper SQL when called without a customer uuid 1`] = `
+Array [
+  Array [
+    Object {
+      "query": [MockFunction],
+    },
+    "SELECT * FROM schemanameFromConfig.customerTable",
+    "customer_code",
+    Object {
+      "id": null,
+      "uuid": null,
+    },
+  ],
+]
+`;

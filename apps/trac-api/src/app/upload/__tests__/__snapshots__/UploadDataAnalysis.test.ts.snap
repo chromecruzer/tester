@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploadDataAnalysis #analytics should return the correct length calculations 1`] = `
+Object {
+  "adds": 3,
+  "modifies": 1,
+  "removes": 1,
+}
+`;
+
+exports[`UploadDataAnalysis #details should return list of added, modified, and removed records 1`] = `
+Object {
+  "adds": Array [
+    Array [
+      "lot1223",
+    ],
+    Array [
+      "lot1225",
+    ],
+    Array [
+      "lot1227",
+    ],
+  ],
+  "modifies": Array [
+    Object {
+      "new": Object {
+        "lot": "lot1225",
+        "uuid": "modified",
+      },
+      "originalUuid": "modified",
+    },
+  ],
+  "removes": Array [
+    Object {
+      "uuid": "removed",
+    },
+  ],
+}
+`;
+
+exports[`UploadDataAnalysis #getModifications should fills in the modifies portion of comparisons correctly 1`] = `
+Array [
+  Object {
+    "original": Object {
+      "lot": "lott1225",
+    },
+    "update": Object {
+      "lot": "lot1225",
+      "uuid": "modified",
+    },
+  },
+]
+`;
+
+exports[`UploadDataAnalysis #getOriginals should create correct sql to get records based on a list uuids 1`] = `"SELECT * FROM schema-name.table-name WHERE uuid IN ( 'uuid01', 'uuid02', 'uuid03');"`;

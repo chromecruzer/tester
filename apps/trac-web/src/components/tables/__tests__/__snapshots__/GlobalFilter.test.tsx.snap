@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GlobalFilter should have no value if filtered text is null 1`] = `"bg-bl-consumer-light text-bl-text-grey p-2 "`;

@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UpdateAuditAnalysis analytics should throw an error if the session is missing 1`] = `
+"Session I am a session not found Error: Made to fail
+    at Object.<anonymous> (/Users/mbletzin/Work/actalent/trac/apps/trac-api/src/app/upload/__tests__/UploadAuditAnalysis.test.ts:105:59)
+    at Promise.then.completed (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/utils.js:333:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/utils.js:259:10)
+    at _callCircusTest (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/run.js:277:40)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:96:5)[39m
+    at _runTest (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/run.js:209:3)
+    at _runTestsForDescribeBlock (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/run.js:97:9)
+    at _runTestsForDescribeBlock (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/run.js:91:9)
+    at _runTestsForDescribeBlock (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/run.js:91:9)"
+`;
+
+exports[`UpdateAuditAnalysis details should return the correct filtered results 1`] = `
+Object {
+  "expired": Array [
+    Object {
+      "audit_match": "Expired",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid9",
+    },
+    Object {
+      "audit_match": "Expired",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid10",
+    },
+  ],
+  "location": Object {
+    "name": "this is a location record",
+    "scan_date": 2021-10-10T05:00:00.000Z,
+  },
+  "matches": Array [
+    Object {
+      "audit_match": "True Match",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid1",
+    },
+    Object {
+      "audit_match": "True Match",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid2",
+    },
+    Object {
+      "audit_match": "True Match",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid3",
+    },
+    Object {
+      "audit_match": "True Match",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid4",
+    },
+    Object {
+      "audit_match": "True Match",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid5",
+    },
+  ],
+  "missing": Array [
+    Object {
+      "audit_match": "Missing",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid12",
+    },
+    Object {
+      "audit_match": "Missing",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid13",
+    },
+    Object {
+      "audit_match": "Missing",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid14",
+    },
+    Object {
+      "audit_match": "Missing",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid15",
+    },
+  ],
+  "moved": Array [
+    Object {
+      "audit_match": "Found In Other Location",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid6",
+    },
+    Object {
+      "audit_match": "Found In Other Location",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid7",
+    },
+    Object {
+      "audit_match": "Found In Other Location",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid8",
+    },
+  ],
+  "nomatches": Array [
+    Object {
+      "audit_match": "No Match",
+      "confirmed_date": null,
+      "expire_date": null,
+      "last_changed_date": null,
+      "uuid": "uuid11",
+    },
+  ],
+}
+`;
+
+exports[`UpdateAuditAnalysis details should throw an error if the session is missing 1`] = `
+"Session I am a session not found Error: Made to fail
+    at Object.<anonymous> (/Users/mbletzin/Work/actalent/trac/apps/trac-api/src/app/upload/__tests__/UploadAuditAnalysis.test.ts:87:57)
+    at Promise.then.completed (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/utils.js:333:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/utils.js:259:10)
+    at _callCircusTest (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/run.js:277:40)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:96:5)[39m
+    at _runTest (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/run.js:209:3)
+    at _runTestsForDescribeBlock (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/run.js:97:9)
+    at _runTestsForDescribeBlock (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/run.js:91:9)
+    at _runTestsForDescribeBlock (/Users/mbletzin/Work/actalent/trac/node_modules/[4mjest-circus[24m/build/run.js:91:9)"
+`;
